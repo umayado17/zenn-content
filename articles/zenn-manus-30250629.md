@@ -1,10 +1,10 @@
------
-
-## title: 【1: 極めて危険】 Manus AI の安全性調査レポート
+---
+title: 【1: 極めて危険】 Manus AI の安全性調査レポート
 emoji: “🚨”
 type: “tech”
 topics: [“Security”, “生成AI”,“tech”,“AI”]
 published: true
+---
 
 # 【1: 極めて危険】 Manus AI の安全性調査レポート
 
