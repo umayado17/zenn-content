@@ -15,4 +15,4 @@ published: true
 2. articlesフォルダに記事ファイル追加
 3. Zennと連携
 
-とても簡単でした。
+とても簡単でしたよ。
