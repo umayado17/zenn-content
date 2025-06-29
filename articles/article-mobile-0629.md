@@ -3,7 +3,7 @@ title: "GitHub Mobileから投稿"
 emoji: "📱"
 type: "tech"
 topics: ["zenn", "github", "mobile"]
-published: false
+published: true
 ---
 
 # GitHub Mobileからの投稿
