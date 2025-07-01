@@ -1,5 +1,5 @@
 ---
-title: 【3: 注意が必要】Hedra の安全性調査レポート
+title: "【3: 注意が必要】Hedra の安全性調査レポート"
 emoji: "🎭"
 type: "tech"
 topics: ["AI", "生成AI", "Security", "tech", "動画"]
