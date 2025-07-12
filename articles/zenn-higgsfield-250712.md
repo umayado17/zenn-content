@@ -2,7 +2,7 @@
 title: “【1: 極めて危険】Higgsfield AI の安全性調査レポート”
 emoji: “⚠️”
 type: “tech”
-topics: [“Security”, “AI”, “地政学”, “Privacy”]
+topics: [“Security”, “AI”, “Privacy”]
 published: true
 ---
 
