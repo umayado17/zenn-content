@@ -10,7 +10,7 @@ published: true
 
 - 対象AIサービス: Kimi K2（Moonshot AI製）
 - 公式URL: https://moonshotai.github.io/Kimi-K2/
-- 安全性レベル: 【1: 極めて危険】
+- 安全性レベル: 【1: 極めて危険】 
 
 ## エグゼクティブ・サマリー
 
