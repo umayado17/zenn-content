@@ -3,7 +3,7 @@ title: "【4: 安全】Kiro の安全性調査レポート"
 emoji: "🔒"
 type: "tech"
 topics: ["Security", "生成AI", "tech", "AI", "AWS"]
-published: true
+published: true 
 ---
 
 # 【4: 安全】Kiro の安全性調査レポート
