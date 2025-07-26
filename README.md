@@ -1,1 +1,1 @@
-# zenn-content
+# blog-content
