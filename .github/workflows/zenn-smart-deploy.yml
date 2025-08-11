@@ -13,111 +13,135 @@ on:
         default: false
         type: boolean
 
+concurrency:
+  group: zenn-smart-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+    env:
+      DEPLOY_INTERVAL_HOURS: 24
+      DEFAULT_BRANCH: main
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-    
-    # 最後のデプロイ時刻をチェック
-    - name: Check last deploy time
-      id: check_timing
-      run: |
-        # 最後の成功したデプロイを探す
-        LAST_DEPLOY_COMMIT=$(git log --grep="Zenn deploy success" --format="%H" -n 1)
-        
-        if [ -z "$LAST_DEPLOY_COMMIT" ]; then
-          echo "can_deploy=true" >> $GITHUB_OUTPUT
-          echo "reason=First deployment" >> $GITHUB_OUTPUT
-        else
-          # 最後のデプロイから24時間経過したかチェック
-          LAST_DEPLOY_TIME=$(git show -s --format=%ct $LAST_DEPLOY_COMMIT)
-          CURRENT_TIME=$(date +%s)
-          TIME_DIFF=$((CURRENT_TIME - LAST_DEPLOY_TIME))
-          HOURS_PASSED=$((TIME_DIFF / 3600))
-          
-          if [ $HOURS_PASSED -ge 24 ] || [ "${{ github.event.inputs.force_deploy }}" = "true" ]; then
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 最後の成功デプロイを特定
+      - name: Find last success marker
+        id: last_success
+        run: |
+          LAST=$(git log --grep="Zenn deploy success" --format="%H %ct" -n 1 || true)
+          if [ -z "$LAST" ]; then
+            echo "commit=" >> $GITHUB_OUTPUT
+            echo "epoch=0" >> $GITHUB_OUTPUT
+          else
+            echo "commit=$(echo "$LAST" | awk '{print $1}')" >> $GITHUB_OUTPUT
+            echo "epoch=$(echo "$LAST" | awk '{print $2}')" >> $GITHUB_OUTPUT
+          fi
+
+      # 24時間経過チェック
+      - name: Check deploy interval
+        id: check_interval
+        run: |
+          FORCE="${{ github.event.inputs.force_deploy }}"
+          if [ "$FORCE" = "true" ]; then
             echo "can_deploy=true" >> $GITHUB_OUTPUT
-            echo "reason=24 hours passed (${HOURS_PASSED}h) or forced" >> $GITHUB_OUTPUT
+            echo "reason=forced by manual dispatch" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          LAST_EPOCH="${{ steps.last_success.outputs.epoch }}"
+          NOW=$(date +%s)
+          DIFF=$((NOW - LAST_EPOCH))
+          HRS=$((DIFF / 3600))
+
+          if [ "$LAST_EPOCH" -eq 0 ]; then
+            echo "can_deploy=true" >> $GITHUB_OUTPUT
+            echo "reason=first deployment" >> $GITHUB_OUTPUT
+          elif [ "$HRS" -ge "$DEPLOY_INTERVAL_HOURS" ]; then
+            echo "can_deploy=true" >> $GITHUB_OUTPUT
+            echo "reason=${HRS}h passed since last success" >> $GITHUB_OUTPUT
           else
             echo "can_deploy=false" >> $GITHUB_OUTPUT
-            REMAINING_HOURS=$((24 - HOURS_PASSED))
-            echo "reason=Need to wait ${REMAINING_HOURS} more hours" >> $GITHUB_OUTPUT
+            echo "reason=need to wait $((DEPLOY_INTERVAL_HOURS - HRS)) more hours" >> $GITHUB_OUTPUT
           fi
-        fi
-    
-    # 新しい記事の変更をチェック
-    - name: Check for article changes
-      id: check_articles
-      if: steps.check_timing.outputs.can_deploy == 'true'
-      run: |
-        # 最後のデプロイ以降の記事変更をチェック
-        LAST_DEPLOY_COMMIT=$(git log --grep="Zenn deploy success" --format="%H" -n 1)
-        
-        if [ -z "$LAST_DEPLOY_COMMIT" ]; then
-          # 初回の場合、全ての記事をチェック
-          NEW_ARTICLES=$(find articles/ -name "*.md" -o -name "*.mdx" 2>/dev/null | wc -l)
-        else
-          # 変更された記事をチェック
-          NEW_ARTICLES=$(git diff --name-only $LAST_DEPLOY_COMMIT HEAD articles/ | grep -E "\.(md|mdx)$" | wc -l)
-        fi
-        
-        echo "article_count=$NEW_ARTICLES" >> $GITHUB_OUTPUT
-        
-        if [ $NEW_ARTICLES -gt 0 ]; then
-          echo "has_changes=true" >> $GITHUB_OUTPUT
-          # 変更された記事一覧を表示
-          echo "Changed articles:"
-          if [ -z "$LAST_DEPLOY_COMMIT" ]; then
-            find articles/ -name "*.md" -o -name "*.mdx" 2>/dev/null || echo "No articles found"
-          else
-            git diff --name-only $LAST_DEPLOY_COMMIT HEAD articles/ | grep -E "\.(md|mdx)$" || echo "No article changes"
-          fi
-        else
-          echo "has_changes=false" >> $GITHUB_OUTPUT
-        fi
-    
-    # 実際のデプロイ実行
-    - name: Deploy to Zenn
-      if: steps.check_timing.outputs.can_deploy == 'true' && steps.check_articles.outputs.has_changes == 'true'
-      run: |
-        echo "Deploying ${{ steps.check_articles.outputs.article_count }} articles to Zenn..."
-        echo "Deploy reason: ${{ steps.check_timing.outputs.reason }}"
-        
-        # Git設定
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        
-        # デプロイ成功をマーク
-        TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S UTC')
-        git commit --allow-empty -m "Zenn deploy success: $TIMESTAMP
 
-        Deployed ${{ steps.check_articles.outputs.article_count }} articles
-        Reason: ${{ steps.check_timing.outputs.reason }}"
-        
-        git push origin main
-        
-        echo "✅ Deployment completed successfully!"
-    
-    # スキップした場合の理由表示
-    - name: Skip deployment
-      if: steps.check_timing.outputs.can_deploy != 'true' || steps.check_articles.outputs.has_changes != 'true'
-      run: |
-        if [ "${{ steps.check_timing.outputs.can_deploy }}" != "true" ]; then
-          echo "⏰ Deployment skipped: ${{ steps.check_timing.outputs.reason }}"
-        elif [ "${{ steps.check_articles.outputs.has_changes }}" != "true" ]; then
-          echo "📝 No new articles to deploy"
-        fi
-        
-        # 次回実行予定を表示
-        NEXT_RUN=$(date -d "+6 hours" '+%Y-%m-%d %H:%M:%S UTC')
-        echo "Next check scheduled at: $NEXT_RUN"
+      # 記事の変更チェック（articles と books を対象）
+      - name: Check content changes
+        id: check_changes
+        if: steps.check_interval.outputs.can_deploy == 'true'
+        run: |
+          set -e
+          LAST_COMMIT="${{ steps.last_success.outputs.commit }}"
+
+          # 対象パスを列挙（必要に応じて調整）
+          TARGETS='articles/**/*.md articles/**/*.mdx books/**/*.md books/**/*.mdx'
+
+          if [ -z "$LAST_COMMIT" ]; then
+            # 初回は存在確認のみ
+            CHANGED=$(ls -1d $TARGETS 2>/dev/null | wc -l | tr -d ' ')
+          else
+            CHANGED=$(git diff --name-only "$LAST_COMMIT"...HEAD -- $TARGETS 2>/dev/null | wc -l | tr -d ' ')
+          fi
+
+          echo "changed_count=$CHANGED" >> $GITHUB_OUTPUT
+          if [ "$CHANGED" -gt 0 ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      # 実デプロイ（ここを実際のZenn向けコマンドに置き換えてください）
+      - name: Deploy to Zenn
+        id: deploy
+        if: steps.check_interval.outputs.can_deploy == 'true' && steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          echo "🚀 Deploy start: ${{ steps.check_interval.outputs.reason }}"
+          echo "Changed items: ${{ steps.check_changes.outputs.changed_count }}"
+
+          # --- ここから実処理 ---
+          # 例）Zenn用ビルド（必要なら）
+          # npx zenn build || { echo "build failed"; exit 1; }
+
+          # 例）ZennへのAPI/CLIがある場合に置き換え
+          # your_deploy_command || { echo "deploy failed"; exit 1; }
+          # --- ここまで実処理 ---
+
+          echo "status=success" >> $GITHUB_OUTPUT
+
+      # 成功時のみ成功マーク（空コミット）を刻む
+      - name: Mark success
+        if: steps.deploy.outputs.status == 'success'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          TS=$(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          git commit --allow-empty -m "Zenn deploy success: ${TS}
+          
+          Reason: ${{ steps.check_interval.outputs.reason }}
+          Changed: ${{ steps.check_changes.outputs.changed_count }}"
+          git push origin $DEFAULT_BRANCH
+          echo "✅ Deployment completed and success marker committed."
+
+      # スキップ・失敗のログ
+      - name: Explain skip or failure
+        if: always() && (steps.deploy.outcome != 'success')
+        run: |
+          if [ "${{ steps.check_interval.outputs.can_deploy }}" != "true" ]; then
+            echo "⏰ Deployment skipped: ${{ steps.check_interval.outputs.reason }}"
+          elif [ "${{ steps.check_changes.outputs.has_changes }}" != "true" ]; then
+            echo "📝 No content changes (articles/books)."
+          else
+            echo "⚠️ Deployment attempted but did not succeed (no success marker written)."
+          fi
+          NEXT_RUN=$(date -u -d "+6 hours" '+%Y-%m-%d %H:%M:%S UTC' 2>/dev/null || date -v+6H -u '+%Y-%m-%d %H:%M:%S UTC')
+          echo "Next check scheduled at: $NEXT_RUN"
