@@ -3,6 +3,7 @@ title: "Qiita用フォルダ"
 tags: ["qiita", "documentation", "readme"]
 private: false
 updated_at: "2025-08-11T00:00:00Z"
+id: "qiita-readme"
 organization_url_name: ""
 slide: false
 ---
@@ -23,5 +24,6 @@ slide: false
 - `tags`: タグ（配列）
 - `private`: 非公開設定（true/false）
 - `updated_at`: 更新日時（文字列）
+- `id`: 記事のID（文字列）
 - `organization_url_name`: 組織名（文字列、個人記事の場合は空）
 - `slide`: スライドモード（true/false）
