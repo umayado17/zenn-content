@@ -7,6 +7,7 @@ published: true
 tags: ["zenn", "github", "mobile"]
 private: false
 updated_at: "2025-08-11T00:00:00Z"
+id: null
 organization_url_name: ""
 slide: false
 ---
