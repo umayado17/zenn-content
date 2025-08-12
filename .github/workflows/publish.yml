@@ -86,18 +86,44 @@ jobs:
       # 1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
       - name: Publish changed markdowns
         if: steps.diff.outputs.files != ''
+        shell: bash
         run: |
-          set -e
-          # 改行区切りのリストを配列に
-          IFS=$'\n' read -d '' -r -a FILES <<< "${{ steps.diff.outputs.files }}"
-          for f in "${FILES[@]}"; do
+          set -Eeuo pipefail
+      
+          # qiita-cli のバージョンを出しておくとデバッグしやすい
+          npx qiita --version || true
+      
+          echo "== Target files =="
+          printf '%s\n' "${{ steps.diff.outputs.files }}"
+      
+          # 複数行出力を while-read で安全に処理（配列にしない）
+          echo "${{ steps.diff.outputs.files }}" | while IFS= read -r f; do
+            # 空行ガード
+            [ -z "$f" ] && continue
+      
+            # ファイル実在チェック（rename/削除に強く）
+            if [ ! -f "$f" ]; then
+              echo "::warning::skip $f (not found)"
+              continue
+            fi
+      
             # ignorePublish: true はスキップ
-            if grep -q '^ignorePublish:\s*true' "$f"; then
+            if grep -qE '^ignorePublish:\s*true' "$f"; then
               echo "skip $f (ignorePublish: true)"
               continue
             fi
+      
+            # デバッグ用に先頭10行を出力（id/updated_at確認）
+            echo "--- head of $f ---"
+            head -n 10 "$f" || true
+            echo "-------------------"
+      
             echo "=== Publish $f ==="
-            npx qiita publish "$f"
+            if ! npx qiita publish "$f"; then
+              echo "::error::publish failed: $f"
+              # ここで続行したいなら continue、止めたいなら exit 1
+              exit 1
+            fi
           done
 
       - name: Commit & push if changed (write back IDs etc.)
