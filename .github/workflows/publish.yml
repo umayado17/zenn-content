@@ -1,36 +1,106 @@
-# .github/workflows/publish.yml
-name: Publish articles to Qiita
+# .github/workflows/qiita-publish.yml
+name: Publish changed articles to Qiita
+
 on:
   push:
     branches: [ main, master ]
-    paths:
-      - 'public/**'
+    paths: [ 'public/**' ]   # public配下の変更のみで起動
   workflow_dispatch:
+    inputs:
+      force_full:
+        description: '全記事を対象にする（トラブルシュート用）'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # 差分取得のため履歴が必要
+
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - run: npm i @qiita/qiita-cli --save-dev
+
       - name: Setup Qiita CLI credentials
         run: |
           mkdir -p ~/.config/qiita-cli
           echo '{"token": "${{ secrets.QIITA_TOKEN }}"}' > ~/.config/qiita-cli/credentials.json
-      - name: Publish all markdowns in /public to Qiita
-        env:
-          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
-        run: npx qiita publish --all
-      - name: Commit & push if changed
+
+      # front matter の型崩れ予防。新規は `id: ""` が前提。
+      - name: Sanitize front matter
+        run: |
+          find public -name '*.md' -print0 | xargs -0 sed -i 's/^id:\s*null\s*$/id: ""/'
+          find public -name '*.md' -print0 | xargs -0 sed -i 's/^updated_at:\s*".*"\s*$/updated_at: ""/'
+          # 全角引用符の除去（誤パース対策）
+          find public -name '*.md' -print0 | xargs -0 sed -i 's/[“”]//g'
+
+      # 今回の push で変わった md を抽出（追加/変更/リネーム）
+      - name: Detect changed markdowns
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="${{ github.event.before }}"
+          # 手動実行 or beforeが取れないケースのフォールバック
+          if [ -z "${BASE_SHA}" ] || ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+
+          if [ "${{ inputs.force_full || false }}" = "true" ]; then
+            echo "files<<EOF" >> $GITHUB_OUTPUT
+            find public -name '*.md' | sort >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          CHANGED=$(git diff --name-only --diff-filter=ACMR "${BASE_SHA}" HEAD | grep -E '^public/.*\.md$' || true)
+
+          # 画像等のアセットが変わったら、参照していそうなmdを広めに拾う（簡易版）
+          ASSET_CHANGED=$(git diff --name-only --diff-filter=ACMR "${BASE_SHA}" HEAD | grep -E '^public/.*\.(png|jpg|jpeg|gif|svg|webp)$' || true)
+          if [ -n "${ASSET_CHANGED}" ]; then
+            # アセットが変わったら public/*.md を全取得（厳密に参照追跡するより安全）
+            CHANGED="$(printf "%s\n%s" "$CHANGED" "$(find public -name '*.md') " | sort -u)"
+          fi
+
+          if [ -z "${CHANGED}" ]; then
+            echo "No markdown changes."
+            echo "files=" >> $GITHUB_OUTPUT
+          else
+            echo "Changed files:"
+            echo "${CHANGED}"
+            echo "files<<EOF" >> $GITHUB_OUTPUT
+            echo "${CHANGED}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+      # 1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
+      - name: Publish changed markdowns
+        if: steps.diff.outputs.files != ''
+        run: |
+          set -e
+          # 改行区切りのリストを配列に
+          IFS=$'\n' read -d '' -r -a FILES <<< "${{ steps.diff.outputs.files }}"
+          for f in "${FILES[@]}"; do
+            # ignorePublish: true はスキップ
+            if grep -q '^ignorePublish:\s*true' "$f"; then
+              echo "skip $f (ignorePublish: true)"
+              continue
+            fi
+            echo "=== Publish $f ==="
+            npx qiita publish "$f"
+          done
+
+      - name: Commit & push if changed (write back IDs etc.)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
