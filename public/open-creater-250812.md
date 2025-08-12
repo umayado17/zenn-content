@@ -3,9 +3,9 @@ title: “【1: 極めて危険】OpenCreator.io の安全性調査レポート�
 tags: [“Security”, “生成AI”, “tech”, “AI”, “Privacy”]
 private: false
 slide: false
-organization_url_name: “https://i-seifu.jp/i-seifu_navi/ai-lab/”
+organization_url_name: null
 id: null
-updated_at: null
+updated_at: ""
 ignorePublish: false
 ---
 
