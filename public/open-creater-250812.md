@@ -1,5 +1,5 @@
 ---
-title: “【1: 極めて危険】OpenCreator.io の安全性調査レポート”
+title: "【1: 極めて危険】OpenCreator.io の安全性調査レポート"
 tags: 
   - “Security”
   - “生成AI”
