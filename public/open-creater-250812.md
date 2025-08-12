@@ -5,7 +5,7 @@ private: false
 slide: false
 organization_url_name: “https://i-seifu.jp/i-seifu_navi/ai-lab/”
 id: null
-updated_at: “”
+updated_at: null
 ignorePublish: false
 ---
 
