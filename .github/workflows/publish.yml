@@ -102,26 +102,23 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-      
-          echo "== Target files =="
-          printf '%s\n' "${{ steps.diff.outputs.files }}"
+          echo "== Target files =="; printf '%s\n' "${{ steps.diff.outputs.files }}"
       
           echo "${{ steps.diff.outputs.files }}" | while IFS= read -r f; do
             [ -z "$f" ] && continue
             [ ! -f "$f" ] && { echo "::warning::skip $f (not found)"; continue; }
             grep -qE '^ignorePublish:\s*true' "$f" && { echo "skip $f (ignorePublish: true)"; continue; }
       
-            # public/ を外した相対パスに変換
-            rel="${f#public/}"
+            # ログ用
+            echo "--- head of $f ---"; head -n 15 "$f" || true; echo "-------------------"
       
-            echo "--- head of $f ---"; head -n 10 "$f" || true; echo "-------------------"
-            echo "=== Publish (rel) $rel ==="
+            # public/を外して basename（拡張子なし）に変換
+            rel="${f#public/}"                 # 例: open-creater-250812.md
+            base="${rel##*/}"                  # 例: open-creater-250812.md
+            name="${base%.md}"                 # 例: open-creater-250812  ← これを渡す
       
-            # 相対パスで呼ぶ（rootDir=public 前提）
-            if ! (cd public && npx qiita publish "$rel"); then
-              echo "::error::publish failed: $f"
-              exit 1
-            fi
+            echo "=== Publish (basename) $name ==="
+            (cd public && npx qiita publish "$name")
           done
 
       - name: Commit & push if changed (write back IDs etc.)
