@@ -32,6 +32,7 @@ jobs:
       - run: npm i @qiita/qiita-cli --save-dev
 
       - name: Setup Qiita CLI credentials
+        shell: bash
         run: |
           mkdir -p ~/.config/qiita-cli
           cat > ~/.config/qiita-cli/credentials.json <<'EOF'
@@ -39,14 +40,15 @@ jobs:
             "default": "default",
             "credentials": [
               {
-                "id": "default",
-                "url_name": "${{ secrets.QIITA_URL_NAME }}",
-                "token": "${{ secrets.QIITA_TOKEN }}"
+                "name": "default",
+                "accessToken": "${{ secrets.QIITA_TOKEN }}"
               }
             ]
           }
           EOF
-          
+          echo "== credentials.json =="
+          cat ~/.config/qiita-cli/credentials.json
+                    
       # front matter の型崩れ予防。新規は `id: ""` が前提。
       - name: Sanitize front matter
         run: |
