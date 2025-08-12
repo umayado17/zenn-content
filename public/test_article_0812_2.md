@@ -1,15 +1,15 @@
 ---
-title: "GitHub から投稿"
-emoji: "📱"
-type: "tech"
-topics: ["zenn", "github", "mobile"]
-published: true
-tags: ["qiita", "github", "mobile"]
+title: GitHub から投稿
+tags:
+  - Qiita
+  - GitHub
+  - Mobile
 private: false
-updated_at: "2025-08-11T00:00:00Z"
-id: null
-organization_url_name: ""
+updated_at: '2025-08-12T12:46:16+09:00'
+id: 876c6e8d3f76e7b54fe8
+organization_url_name: null
 slide: false
+ignorePublish: false
 ---
 
 # GitHub から投稿
