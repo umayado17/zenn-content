@@ -34,8 +34,19 @@ jobs:
       - name: Setup Qiita CLI credentials
         run: |
           mkdir -p ~/.config/qiita-cli
-          echo '{"token": "${{ secrets.QIITA_TOKEN }}"}' > ~/.config/qiita-cli/credentials.json
-
+          cat > ~/.config/qiita-cli/credentials.json <<'EOF'
+          {
+            "default": "default",
+            "credentials": [
+              {
+                "id": "default",
+                "url_name": "${{ secrets.QIITA_URL_NAME }}",
+                "token": "${{ secrets.QIITA_TOKEN }}"
+              }
+            ]
+          }
+          EOF
+          
       # front matter の型崩れ予防。新規は `id: ""` が前提。
       - name: Sanitize front matter
         run: |
