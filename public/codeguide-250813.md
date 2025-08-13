@@ -5,7 +5,7 @@ private: false
 slide: false
 organization_url_name: ""
 id: ""
-updated_at: “2025-01-15T14:30:00+09:00”
+updated_at: ""
 ignorePublish: false
 ---
 
