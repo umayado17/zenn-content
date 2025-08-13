@@ -1,11 +1,16 @@
 ---
-title: "【緊急警告】VS Code拡張機能を狙った高度な供給チェーン攻撃の詳細分析"
-tags: [Security, VSCode, 拡張機能, サプライチェーン攻撃, フォレンジック]
+title: 【緊急警告】VS Code拡張機能を狙った高度な供給チェーン攻撃の詳細分析
+tags:
+  - Security
+  - 拡張機能
+  - VSCode
+  - Forensics
+  - サプライチェーン攻撃
 private: false
+updated_at: '2025-08-13T11:35:30+09:00'
+id: e4a44f81a8a50a74cae6
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: "2025-01-14T15:30:00+09:00"
 ignorePublish: false
 ---
 
