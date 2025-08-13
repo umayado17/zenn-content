@@ -1,11 +1,15 @@
 ---
-title: "【4: 安全】LOVERSE（ラヴァース）の安全性調査レポート"
-tags: [Security, AI, tech, LLM]
+title: '【4: 安全】LOVERSE（ラヴァース）の安全性調査レポート'
+tags:
+  - Security
+  - tech
+  - AI
+  - LLM
 private: false
+updated_at: '2025-08-13T16:38:23+09:00'
+id: c61b877205ec173628b6
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: "2025-08-13T12:46:16+09:00"
 ignorePublish: false
 ---
 
