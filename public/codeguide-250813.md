@@ -1,10 +1,10 @@
 ---
-title: “【1: 極めて危険】CodeGuide.dev の安全性調査レポート”
+title: "【1: 極めて危険】CodeGuide.dev の安全性調査レポート"
 tags: [Security, AI, GeoPolitics, tech, Documentation]
 private: false
 slide: false
-organization_url_name: “”
-id: “”
+organization_url_name: ""
+id: ""
 updated_at: “2025-01-15T14:30:00+09:00”
 ignorePublish: false
 ---
