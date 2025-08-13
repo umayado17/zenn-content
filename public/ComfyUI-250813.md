@@ -1,11 +1,16 @@
 ---
-title: "【5: 極めて安全】ComfyUI の安全性調査レポート"
-tags: [AI, Security, ComfyUI, 経済安全保障, 画像生成]
+title: '【5: 極めて安全】ComfyUI の安全性調査レポート'
+tags:
+  - Security
+  - AI
+  - 画像生成
+  - comfyui
+  - 経済安全保障
 private: false
+updated_at: '2025-08-13T23:55:49+09:00'
+id: f15f714d10539bdd141d
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
