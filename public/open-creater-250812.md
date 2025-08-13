@@ -1,15 +1,15 @@
 ---
-title: "【1: 極めて危険】OpenCreator.io の安全性調査レポート"
-tags: 
+title: '【1: 極めて危険】OpenCreator.io の安全性調査レポート'
+tags:
   - Security
-  - 生成AI
   - tech
   - AI
-  - Privacy
+  - privacy
+  - 生成AI
 private: false
-updated_at: "2025-08-12T00:00:00Z"
-id: ""
-organization_url_name: null 
+updated_at: '2025-08-13T09:18:33+09:00'
+id: 917b21fe7f24f7eb6907
+organization_url_name: null
 slide: false
 ignorePublish: false
 ---
@@ -239,28 +239,28 @@ with Service Providers"
 
 **OpenCreator.io公式サイトより:**
 
-1. **“We integrate all kinds of Gen-AI creative models into an intuitive interface”**
+1. **We integrate all kinds of Gen-AI creative models into an intuitive interface**
 - 出典: <https://opencreator.io/>
 - 検証結果: 具体的統合方法・API仕様の非公開
-1. **“20+ top AI models in 1 platform”**
+1. **20+ top AI models in 1 platform**
 - 出典: 同上
-- 検証結果: “top”の定義・選定基準不明、モデル詳細一覧なし
-1. **“1-click comparison for the best results”**
+- 検証結果: topの定義・選定基準不明、モデル詳細一覧なし
+1. **1-click comparison for the best results**
 - 出典: 同上
 - 検証結果: 比較アルゴリズム・評価基準の非公開
-1. **“0% Markup, 0 Subscription, 0 Waste”**
+1. **0% Markup, 0 Subscription, 0 Waste**
 - 出典: 同上
 - 検証結果: 実際は月額29-149ドルのサブスクリプション制
-1. **“Powerful doesn’t mean complicated. Designed for creators who want top-tier AI results”**
+1. **Powerful doesn’t mean complicated. Designed for creators who want top-tier AI results**
 - 出典: 同上
-- 検証結果: “top-tier”の定義・根拠データなし
+- 検証結果: top-tierの定義・根拠データなし
 
 ### インフルエンサー・技術者の評価
 
 **限定的な言及のみ確認:**
 
 1. **一般的なAIツール紹介サイトでの掲載**
-- [Toolify.ai](https://www.toolify.ai/tool/opencreator): “OpenCreator is a unified Gen-AI workstation”
+- [Toolify.ai](https://www.toolify.ai/tool/opencreator): OpenCreator is a unified Gen-AI workstation
 - 利害関係: 広告収入モデル、中立性に疑問
 1. **Product Huntでの別サービス（SagaLabs翻訳）への評価**
 - <https://www.producthunt.com/products/sagalabs>
