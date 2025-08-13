@@ -118,7 +118,7 @@ jobs:
             name="${base%.md}"                 # 例: open-creater-250812  ← これを渡す
       
             echo "=== Publish (basename) $name ==="
-            (cd public && npx qiita publish "$name")
+            npx qiita publish "$name" --verbose
           done
 
       - name: Commit & push if changed (write back IDs etc.)
