@@ -1,6 +1,6 @@
 ---
 title: "【緊急警告】VS Code拡張機能を狙った高度な供給チェーン攻撃の詳細分析"
-topics: [Security, VSCode, 拡張機能, サプライチェーン攻撃, フォレンジック]
+tags: [Security, VSCode, 拡張機能, サプライチェーン攻撃, フォレンジック]
 private: false
 slide: false
 organization_url_name: "https://i-seifu.jp/i-seifu_navi/ai-lab/"
