@@ -1,11 +1,16 @@
 ---
-title: "【1: 極めて危険】LOVERSE の安全性調査レポート"
-tags: [AI, Security, LOVERSE, 日本, 親密AI]
+title: '【1: 極めて危険】LOVERSE の安全性調査レポート'
+tags:
+  - Security
+  - AI
+  - 日本
+  - LOVERSE
+  - 親密AI
 private: false
+updated_at: '2025-08-14T00:03:45+09:00'
+id: d95754ebb28bd108abbc
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
