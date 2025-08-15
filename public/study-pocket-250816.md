@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】スタディポケット：透明性の高い国産教育AIサービスの安全性評価"
-tags: [AI, Security, 教育AI, Azure, OpenAI]
+title: '【4: 安全】スタディポケット：透明性の高い国産教育AIサービスの安全性評価'
+tags:
+  - Azure
+  - Security
+  - AI
+  - OpenAI
+  - 教育AI
 private: false
+updated_at: '2025-08-16T00:02:49+09:00'
+id: faca9d122657b40d38af
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
