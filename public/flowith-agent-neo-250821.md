@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】Flowith Agent Neo：国籍偽装で隠蔽された中華AIの危険な実態"
-tags: [AI, Security, China, GeopoliticalRisk, Flowith]
+title: '【0: 使用不可】Flowith Agent Neo：国籍偽装で隠蔽された中華AIの危険な実態'
+tags:
+  - Security
+  - AI
+  - CHINA
+  - GeopoliticalRisk
+  - Flowith
 private: false
+updated_at: '2025-08-21T08:40:47+09:00'
+id: 729973bfe8eff9ac74ec
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
