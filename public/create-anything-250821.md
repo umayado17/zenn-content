@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】Anything AI（旧Create.xyz）の安全性調査レポート"
-tags: [AI, Security, Anything, NoCode, Privacy]
+title: '【4: 安全】Anything AI（旧Create.xyz）の安全性調査レポート'
+tags:
+  - Security
+  - AI
+  - anything
+  - privacy
+  - nocode
 private: false
+updated_at: '2025-08-21T13:16:25+09:00'
+id: 5b6d6612e619c33d50a1
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
