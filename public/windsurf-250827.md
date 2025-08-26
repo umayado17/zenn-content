@@ -1,12 +1,17 @@
 ---
-title: "【3: 注意が必要】Windsurf AI Code Editor の安全性調査レポート"
-tags: [AI, Security, Windsurf, CodeEditor, GoogleDeepMind]
+title: '【3: 注意が必要】Windsurf AI Code Editor の安全性調査レポート'
+tags:
+  - Security
+  - AI
+  - GoogleDeepMind
+  - Windsurf
+  - CodeEditor
 private: false
+updated_at: '2025-08-27T00:55:49+09:00'
+id: e240d40568d99cbabeb6
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
-ignorePublish: false 
+ignorePublish: false
 ---
 
 # 【3: 注意が必要】Windsurf AI Code Editor の安全性調査レポート
