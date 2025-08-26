@@ -127,7 +127,7 @@ jobs:
         shell: bash
         env:
           GAS_WEBHOOK_URL: ${{ secrets.GAS_WEBHOOK_URL }}
-          GITHUB_GAS_TOKEN: ${{ secrets.GITHUB_GAS_TOKEN }}
+          GAS_TOKEN: ${{ secrets.GAS_TOKEN }}
         run: |
           set -euo pipefail
           
@@ -157,7 +157,7 @@ jobs:
                 payload=$(cat <<EOF
           {
             "source": "qiita_rss",
-            "secret": "$GITHUB_GAS_TOKEN",
+            "secret": "$GAS_TOKEN",
             "serviceName": "$title",
             "qiitaUrl": "$qiita_url",
             "publishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
