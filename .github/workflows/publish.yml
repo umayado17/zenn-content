@@ -1,4 +1,4 @@
-# .github/workflows/qiita-publish.yml
+# .github/workflows/publish.yml
 name: Publish changed articles to Qiita
 
 on:
@@ -55,7 +55,7 @@ jobs:
           find public -name '*.md' -print0 | xargs -0 sed -i 's/^id:\s*null\s*$/id: ""/'
           find public -name '*.md' -print0 | xargs -0 sed -i 's/^updated_at:\s*".*"\s*$/updated_at: ""/'
           # 全角引用符の除去（誤パース対策）
-          find public -name '*.md' -print0 | xargs -0 sed -i 's/[“”]//g'
+          find public -name '*.md' -print0 | xargs -0 sed -i 's/[""]//g'
 
       # 今回の push で変わった md を抽出（追加/変更/リネーム）
       - name: Detect changed markdowns
@@ -96,7 +96,7 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           fi
 
-      # 1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
+      # 【既存処理】1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
       - name: Publish changed markdowns
         if: steps.diff.outputs.files != ''
         shell: bash
@@ -121,6 +121,82 @@ jobs:
             npx qiita publish "$name" --verbose
           done
 
+      # 【新規追加】GAS通知専用ステップ
+      - name: Notify published articles to GAS
+        if: steps.diff.outputs.files != ''
+        shell: bash
+        env:
+          GAS_WEBHOOK_URL: ${{ secrets.GAS_WEBHOOK_URL }}
+          GITHUB_GAS_TOKEN: ${{ secrets.GITHUB_GAS_TOKEN }}
+        run: |
+          set -euo pipefail
+          
+          echo "=== Collecting published articles info ==="
+          
+          echo "${{ steps.diff.outputs.files }}" | while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            [ ! -f "$f" ] && continue
+            grep -qE '^ignorePublish:\s*true' "$f" && continue
+            
+            # QiitaのIDが設定されているかチェック（公開済みの判定）
+            qiita_id=$(grep '^id:' "$f" | sed 's/^id: *"*\(.*\)"* *$/\1/' | sed 's/"$//')
+            
+            if [ -n "$qiita_id" ] && [ "$qiita_id" != "" ]; then
+              # タイトル取得
+              title=$(grep '^title:' "$f" | sed 's/^title: *"*\(.*\)"* *$/\1/' | sed 's/"$//')
+              qiita_url="https://qiita.com/items/$qiita_id"
+              
+              rel="${f#public/}"
+              base="${rel##*/}"
+              name="${base%.md}"
+              
+              echo "📝 Found published article: $title -> $qiita_url"
+              
+              # GAS通知処理
+              if [ -n "${GAS_WEBHOOK_URL:-}" ]; then
+                payload=$(cat <<EOF
+          {
+            "source": "qiita_rss",
+            "secret": "$GITHUB_GAS_TOKEN",
+            "serviceName": "$title",
+            "qiitaUrl": "$qiita_url",
+            "publishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "author": "$(whoami)",
+            "qiita_id": "$qiita_id",
+            "filename": "$name",
+            "repository": "${{ github.repository }}",
+            "commit_sha": "${{ github.sha }}"
+          }
+          EOF
+                )
+                
+                echo "🔔 Notifying GAS for: $title"
+                
+                curl_response=$(curl -s -w "HTTPSTATUS:%{http_code}" \
+                  -X POST \
+                  -H "Content-Type: application/json" \
+                  -d "$payload" \
+                  "$GAS_WEBHOOK_URL" || echo "HTTPSTATUS:000")
+                
+                http_code=$(echo "$curl_response" | grep -o "HTTPSTATUS:[0-9]*" | cut -d: -f2)
+                response_body=$(echo "$curl_response" | sed -E 's/HTTPSTATUS:[0-9]*$//')
+                
+                if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+                  echo "✅ GAS notification successful for: $title"
+                  echo "Response: $response_body"
+                else
+                  echo "⚠️  GAS notification failed for: $title (HTTP $http_code)"
+                  echo "Response: $response_body"
+                fi
+              else
+                echo "⚠️  GAS_WEBHOOK_URL not set, skipping notification"
+              fi
+            else
+              echo "ℹ️  No Qiita ID found in $f (not published or failed)"
+            fi
+          done
+
+      # 【既存処理】変更の書き戻し
       - name: Commit & push if changed (write back IDs etc.)
         run: |
           git config user.name "github-actions[bot]"
