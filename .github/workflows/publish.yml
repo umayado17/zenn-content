@@ -1,4 +1,4 @@
-# .github/workflows/publish.yml
+# .github/workflows/qiita-publish.yml
 name: Publish changed articles to Qiita
 
 on:
@@ -55,7 +55,7 @@ jobs:
           find public -name '*.md' -print0 | xargs -0 sed -i 's/^id:\s*null\s*$/id: ""/'
           find public -name '*.md' -print0 | xargs -0 sed -i 's/^updated_at:\s*".*"\s*$/updated_at: ""/'
           # 全角引用符の除去（誤パース対策）
-          find public -name '*.md' -print0 | xargs -0 sed -i 's/[""]//g'
+          find public -name '*.md' -print0 | xargs -0 sed -i 's/[“”]//g'
 
       # 今回の push で変わった md を抽出（追加/変更/リネーム）
       - name: Detect changed markdowns
@@ -96,7 +96,7 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           fi
 
-      # 【既存処理】1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
+      # 1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
       - name: Publish changed markdowns
         if: steps.diff.outputs.files != ''
         shell: bash
