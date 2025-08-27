@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】Remotion の安全性調査レポート - React開発者向けビデオ作成ライブラリ"
-tags: [AI, Security, React, Video, Switzerland]
+title: '【4: 安全】Remotion の安全性調査レポート - React開発者向けビデオ作成ライブラリ'
+tags:
+  - Security
+  - Video
+  - AI
+  - React
+  - Switzerland
 private: false
+updated_at: '2025-08-27T23:36:39+09:00'
+id: 94c1533ec75fa81d51c5
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
