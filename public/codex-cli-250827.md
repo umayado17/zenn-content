@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】OpenAI Codex CLI の安全性調査レポート"
-tags: [AI, Security, OpenAI, CLI, Codex]
+title: '【4: 安全】OpenAI Codex CLI の安全性調査レポート'
+tags:
+  - Security
+  - CLI
+  - AI
+  - OpenAI
+  - codex
 private: false
+updated_at: '2025-08-28T00:03:50+09:00'
+id: 18345665a949bec088d8
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
