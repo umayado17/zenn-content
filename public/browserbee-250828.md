@@ -1,11 +1,16 @@
 ---
-title: "【3: 注意が必要】BrowserBee 🐝 の安全性調査レポート - AI駆動Chrome拡張機能のリスクと可能性"
-tags: [AI, Security, Chrome, BrowserAutomation, Privacy]
+title: "【3: 注意が必要】BrowserBee \U0001F41D の安全性調査レポート - AI駆動Chrome拡張機能のリスクと可能性"
+tags:
+  - Chrome
+  - Security
+  - AI
+  - privacy
+  - BrowserAutomation
 private: false
+updated_at: '2025-08-28T17:06:46+09:00'
+id: c89f40166baa4a16faba
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
