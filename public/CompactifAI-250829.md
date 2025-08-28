@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】CompactifAI の安全性調査レポート - 西側量子AI圧縮技術の透明性評価"
-tags: [AI, Security, Compression, QuantumComputing, Spain]
+title: '【4: 安全】CompactifAI の安全性調査レポート - 西側量子AI圧縮技術の透明性評価'
+tags:
+  - Security
+  - Compression
+  - AI
+  - QuantumComputing
+  - Spain
 private: false
+updated_at: '2025-08-29T00:29:45+09:00'
+id: 6479a07ed32e0c077d4f
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
