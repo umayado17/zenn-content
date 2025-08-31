@@ -1,11 +1,16 @@
 ---
-title: "【3: 注意が必要】Voice-in Chrome拡張機能の安全性調査レポート"
-tags: [AI, Security, Chrome, Privacy, VoiceRecognition]
+title: '【3: 注意が必要】Voice-in Chrome拡張機能の安全性調査レポート'
+tags:
+  - Chrome
+  - Security
+  - AI
+  - privacy
+  - VoiceRecognition
 private: false
+updated_at: '2025-08-31T12:48:42+09:00'
+id: 23067416e7f4d15dc716
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
