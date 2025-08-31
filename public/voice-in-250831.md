@@ -11,7 +11,7 @@ updated_at: '2025-08-31T12:56:09+09:00'
 id: 23067416e7f4d15dc716
 organization_url_name: null
 slide: false
-ignorePublish: false
+ignorePublish: false 
 ---
 
 Voice-in は600,000+ユーザーが利用する音声入力Chrome拡張機能です。「ローカル処理のみ」を謳っていますが、実際はGoogleサーバーでの処理が必要な点に注意が必要です。
