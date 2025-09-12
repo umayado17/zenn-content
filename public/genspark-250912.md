@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】Genspark Browser：現代版トロイの木馬の技術的実態と緊急対応"
-tags: [Security, AI, China, Browser, GeopoliticalRisk]
+title: '【0: 使用不可】Genspark Browser：現代版トロイの木馬の技術的実態と緊急対応'
+tags:
+  - Security
+  - ブラウザ
+  - AI
+  - CHINA
+  - GeopoliticalRisk
 private: false
+updated_at: '2025-09-12T23:52:33+09:00'
+id: 311f480623eea887b66a
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
