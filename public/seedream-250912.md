@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】Seedream V4の安全性調査レポート：史上最悪の多層偽装詐欺スキーム"
-tags: [AI, Security, China, GeopoliticalRisk, ByteDance]
+title: '【0: 使用不可】Seedream V4の安全性調査レポート：史上最悪の多層偽装詐欺スキーム'
+tags:
+  - Security
+  - AI
+  - CHINA
+  - GeopoliticalRisk
+  - ByteDance
 private: false
+updated_at: '2025-09-12T14:54:56+09:00'
+id: d0ff45ae732459bd6f0b
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
@@ -70,7 +75,7 @@ graph TD
 
 **第13条（管轄法）の虚偽記載**:
 
-> “These terms are governed by the laws of the United Kingdom”
+> These terms are governed by the laws of the United Kingdom
 
 **実態調査結果**:
 
@@ -96,7 +101,7 @@ Nanshan District, Shenzhen, China
 #### 詐欺判定サイトでの評価
 
 - **Scam Detector**: 21.3/100点[^4]
-- **Scamadviser**: “suspicious website”, “scam疑い”[^5]
+- **Scamadviser**: suspicious website, scam疑い[^5]
 
 ### 地政学的リスク評価
 
@@ -104,7 +109,7 @@ Nanshan District, Shenzhen, China
 
 **第7条**による強制協力義務:
 
-> “あらゆる組織および個人は、法に従って国家の情報活動に協力し、国家の情報活動の秘密を守る義務を負う”
+> あらゆる組織および個人は、法に従って国家の情報活動に協力し、国家の情報活動の秘密を守る義務を負う
 
 **実務的影響**:
 
@@ -195,13 +200,13 @@ user_profile = {
 
 **WinBuzzer記事**[^10]:
 
-> “ByteDance Challenges Google’s ‘Nano Banana’ With New Seedream 4.0”
+> ByteDance Challenges Google’s ‘Nano Banana’ With New Seedream 4.0
 
 **問題**: Google対抗として好意的に報道するが、偽装工作については完全無視。
 
 **CometAPI記事**[^9]:
 
-> “ByteDance unveils Seedream 4.0, a multimodal image-creation model”
+> ByteDance unveils Seedream 4.0, a multimodal image-creation model
 
 **問題**: 純技術面のみ報道、法的・セキュリティリスクへの言及皆無。
 
