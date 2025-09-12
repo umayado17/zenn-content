@@ -1,11 +1,11 @@
 ---
-title: “【0: 使用不可】Seedream V4の安全性調査レポート：史上最悪の多層偽装詐欺スキーム”
+title: "【0: 使用不可】Seedream V4の安全性調査レポート：史上最悪の多層偽装詐欺スキーム"
 tags: [AI, Security, China, GeopoliticalRisk, ByteDance]
 private: false
 slide: false
-organization_url_name: “”
-id: “”
-updated_at: “”
+organization_url_name: ""
+id: ""
+updated_at: ""
 ignorePublish: false
 ---
 
