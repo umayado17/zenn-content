@@ -4,7 +4,7 @@ tags: [AI, China, Regulation, GenerativeAI, DataSecurity]
 private: false
 slide: false
 organization_url_name: ""
-updated_at: '2025-09-28T09:36:18+09:00'
+updated_at: ""
 id: 5ad305727e0e6bf3276f
 organization_url_name: null
 slide: false
