@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】SousakuAI：TikTok運営ByteDanceが仕掛ける「日本製AI」偽装の罠"
-tags: [AI, Security, ByteDance, TikTok, GeopoliticalRisk]
+title: '【0: 使用不可】SousakuAI：TikTok運営ByteDanceが仕掛ける「日本製AI」偽装の罠'
+tags:
+  - Security
+  - AI
+  - tiktok
+  - GeopoliticalRisk
+  - ByteDance
 private: false
+updated_at: '2025-09-30T18:48:39+09:00'
+id: 874574e846374ca85e87
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
