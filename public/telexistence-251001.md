@@ -1,11 +1,16 @@
 ---
-title: "【3: 注意が必要】Telexistence ロボットサービスの安全性調査レポート"
-tags: [AI, Security, Robotics, B2B, Japan]
+title: '【3: 注意が必要】Telexistence ロボットサービスの安全性調査レポート'
+tags:
+  - Security
+  - Japan
+  - AI
+  - robotics
+  - b2b
 private: false
+updated_at: '2025-10-01T10:54:12+09:00'
+id: adf1dbdc3116bbb3c2ed
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
