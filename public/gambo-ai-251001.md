@@ -1,11 +1,16 @@
 ---
-title: "【1: 極めて危険】Gambo（gambo.ai）の安全性調査レポート"
-tags: ["AI", "Security", "Gambo", "GeopoliticalRisk", "China"]
+title: '【1: 極めて危険】Gambo（gambo.ai）の安全性調査レポート'
+tags:
+  - Security
+  - AI
+  - CHINA
+  - GeopoliticalRisk
+  - Gambo
 private: false
+updated_at: '2025-10-01T10:31:27+09:00'
+id: 029c3f7df2bca3507288
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
