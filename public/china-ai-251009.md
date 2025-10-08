@@ -1,14 +1,14 @@
 ---
 title: AIツール選定における地政学的リスク：中国の「AI×国際発信」戦略の技術的分析
 tags:
+  - Security
   - AI
-  - セキュリティ
-  - 地政学
-  - DeepSeek
   - リスク管理
+  - 地政学
+  - deepseek
 private: false
-updated_at: ''
-id: null
+updated_at: '2025-10-09T00:29:16+09:00'
+id: 59889abcc45658a21d8f
 organization_url_name: null
 slide: false
 ignorePublish: false
