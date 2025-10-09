@@ -1,14 +1,14 @@
 ---
-title: "中国の社会信用システム（SCS）の実態：技術アーキテクチャと国際展開の可能性"
+title: 中国の社会信用システム（SCS）の実態：技術アーキテクチャと国際展開の可能性
 tags:
-  - Security          # セキュリティ関連記事として
-  - プライバシー        # データ保護・個人情報の観点
-  - アーキテクチャ      # システム設計・技術解説として
-  - リスク管理         # 実務的なリスク評価・対策
-  - 国際関係          # 国際展開・グローバルな視点
-updated_at: ""
-id: ""
+  - Security
+  - アーキテクチャ
+  - リスク管理
+  - プライバシー
+  - 国際関係
 private: false
+updated_at: '2025-10-09T21:17:16+09:00'
+id: 7c76cb4d259d5dddc41d
 organization_url_name: null
 slide: false
 ignorePublish: false
