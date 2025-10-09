@@ -6,18 +6,12 @@ tags:
   - アーキテクチャ      # システム設計・技術解説として
   - リスク管理         # 実務的なリスク評価・対策
   - 国際関係          # 国際展開・グローバルな視点
-author: ""
-description: "SCSと档案制度の二層構造を技術的・法的に解説。誤解を正し、実務で使える対策を提示。技術者・法務担当者必読。"
-topics:
-  - 社会信用システム
-  - 档案制度
-  - データ主権
-  - 生体データ
-  - グローバル監視
-created_at: 2025-10-09
-updated_at: 2025-10-09
+updated_at: ""
+id: ""
 private: false
-qiita_url: ""
+organization_url_name: null
+slide: false
+ignorePublish: false
 ---
 
 ## はじめに
