@@ -1109,8 +1109,8 @@ X（Twitter）、Facebook、LinkedInで、本記事をシェアしてくださ�
 
 **プロジェクトURL:**
 - GitHub: https://github.com/privacy-label-initiative
-- 公式サイト: https://privacy-label.org（準備中）
-- Twitter: @PrivacyLabelJP（準備中）
+- 公式サイト: https://privacy-label.org （準備中）
+- Twitter: @PrivacyLabelJP （準備中）
 - 署名: （Change.orgリンク、準備中）
 
 **発起人への連絡先:**
@@ -1685,18 +1685,6 @@ Article 45 - Transfers on the basis of an adequacy decision
 - Aladdin X公式サイト: https://www.aladdinx.jp/
 - 個人情報保護委員会: https://www.ppc.go.jp/
 - 消費者庁: https://www.caa.go.jp/
-
-### D. サンプルコード集
-
-本記事で紹介した技術的実装のサンプルコードを、GitHubリポジトリにまとめています。
-
-- ラベル生成ツール（Python）: https://github.com/privacy-label/generator-python
-- トラフィック監視ツール（Python + Wireshark）: https://github.com/privacy-label/traffic-monitor
-- ブラウザ拡張機能（JavaScript）: https://github.com/privacy-label/browser-extension
-- JSON Schema定義: https://github.com/privacy-label/json-schema
-- APIライブラリ（各種言語）: https://github.com/privacy-label/api-libraries
-
-これらはすべてMITライセンスのオープンソースです。貢献を歓迎します。
 
 ---
 
