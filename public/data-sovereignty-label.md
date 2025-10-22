@@ -1,14 +1,14 @@
 ---
-title: "データ主権ラベル：IoTデバイスに「栄養成分表示」を義務化せよ - Aladdin Xから考える、日本のデジタル主権"
+title: データ主権ラベル：IoTデバイスに「栄養成分表示」を義務化せよ - Aladdin Xから考える、日本のデジタル主権
 tags:
-  - プライバシー
+  - Security
   - IoT
-  - セキュリティ
   - 個人情報保護
   - データガバナンス
+  - プライバシー
 private: false
-updated_at: ''
-id: null
+updated_at: '2025-10-22T18:10:39+09:00'
+id: 26132d3c20e88f535c56
 organization_url_name: null
 slide: false
 ignorePublish: false
