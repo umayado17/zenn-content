@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】Plaud.ai セキュリティ分析：米国企業を装った中国製AIレコーダーの統治リスク"
-tags: [AI, Security, China, GeopoliticalRisk, Privacy]
+title: '【0: 使用不可】Plaud.ai セキュリティ分析：米国企業を装った中国製AIレコーダーの統治リスク'
+tags:
+  - Security
+  - AI
+  - CHINA
+  - privacy
+  - GeopoliticalRisk
 private: false
+updated_at: '2025-10-27T00:27:30+09:00'
+id: 3140fee0554df6040a2b
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
