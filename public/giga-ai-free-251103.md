@@ -1,11 +1,16 @@
 ---
-title: "【1: 極めて危険】Giga AI Free：透明性欠如が生む法的リスク - Anthropic規約との整合性検証"
-tags: [AI, Security, Claude, Privacy, GeopoliticalRisk]
+title: '【1: 極めて危険】Giga AI Free：透明性欠如が生む法的リスク - Anthropic規約との整合性検証'
+tags:
+  - Security
+  - AI
+  - privacy
+  - Claude
+  - GeopoliticalRisk
 private: false
+updated_at: '2025-11-03T07:00:45+09:00'
+id: 18ba813237872c52c6d4
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
