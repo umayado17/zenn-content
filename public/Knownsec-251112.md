@@ -1,14 +1,14 @@
 ---
 title: 知道創宇(Knownsec)データ漏洩事件 - 中国国家支援サイバースパイ活動の全容解明
 tags:
-  - セキュリティ
-  - サイバーセキュリティ
+  - Security
   - 情報セキュリティ
+  - サイバーセキュリティ
   - 中国
   - データ漏洩
 private: false
-updated_at: '2025-11-12'
-id: null
+updated_at: '2025-11-12T00:28:51+09:00'
+id: ab097cd846a43e2825fd
 organization_url_name: null
 slide: false
 ignorePublish: false
