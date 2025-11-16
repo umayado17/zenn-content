@@ -1821,10 +1821,7 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 
 **本記事の無断転載を禁じます。ただし、非営利目的での引用・共有は歓迎します。その際は出典を明記してください。**
 
-
 ## 脚注・参考文献
-
-### 脚注・参考文献（第I章）
 
 [^1]: Anthropic (2025). "Disrupting the first reported AI-orchestrated cyber espionage campaign - Full Report", November 2025. Executive Summary. https://www.anthropic.com/news/disrupting-AI-espionage
 
@@ -1841,8 +1838,6 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 [^7]: 同上, "This activity represents a significant escalation from the earlier 'vibe hacking' discovery" の記述
 
 [^8]: 同上, "While we only have visibility into Claude usage" の記述
-
-### 脚注・参考文献（第II章）
 
 [^9]: Deng Xiaoping's "Hide and Bide" strategy (韜光養晦), 1990年代の中国外交方針として知られる。詳細は: 中国外交部公式文書、および Yan Xuetong "The Rise of China in Chinese Eyes" (2001)
 
@@ -1880,9 +1875,6 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 
 [^26]: IHS Markit "Video Surveillance Market Share Report" (2020-2023)。Hikvision約40%、Dahua約15%でトップ2
 
-
-### 脚注・参考文献（第III章）
-
 [^27]: EU GDPR第13条・第14条は、データ収集時の詳細な情報提供義務を定めている。データ成分表示はこれをさらに視覚化・簡素化したもの
 
 [^28]: 米国「栄養表示教育法」(Nutrition Labeling and Education Act, NLEA, 1990)。FDA実施後、消費者行動研究で効果が実証されている。参考: Journal of Consumer Research等
@@ -1905,8 +1897,6 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 
 [^37]: 米国「CHIPS and Science Act」(2022年)。半導体製造に527億ドルの補助金・税制優遇
 
-### 脚注・参考文献（第IV章）
-
 [^38]: 米国防総省「China Military Power Report 2021-2024」各年版。2021年に当時のインド太平洋軍司令官Philip Davidson提督が議会証言で「中国は6年以内（2027年まで）に台湾侵攻能力を整える」と警告。後継者も同様の懸念を表明
 
 [^39]: 習近平は2022年10月の第20回党大会で異例の3期目に入った。2027年は人民解放軍創設100周年（1927年8月1日の南昌起義から）
@@ -1919,13 +1909,9 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 
 [^43]: 第一次大戦前の経済的相互依存と戦争勃発については、Norman Angell "The Great Illusion" (1909) が皮肉にも「経済的相互依存が戦争を不可能にする」と主張したが、1914年に第一次大戦が勃発。第二次大戦前のドイツと欧州の経済関係についても同様
 
-### 脚注・参考文献（第V章）
-
 [^44]: Benjamin Franklin (1755). "Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety"
 
 [^45]: Winston Churchill (1947年11月11日). "Democracy is the worst form of government, except for all those other forms"
-
-### 脚注・参考文献（追加）
 
 [^46]: 知乎専欄「改革开放究竟改变了什么？」[https://zhuanlan.zhihu.com/p/410283757](https://zhuanlan.zhihu.com/p/410283757) （改革開放を「全世界の資本家に発財のチャンスを与える」と表現）
 
