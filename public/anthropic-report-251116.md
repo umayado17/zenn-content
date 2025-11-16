@@ -187,26 +187,6 @@ Anthropic自身も、こう認めている。
 
 ---
 
-## 脚注・参考文献
-
-[^1]: Anthropic (2025). "Disrupting the first reported AI-orchestrated cyber espionage campaign - Full Report", November 2025. Executive Summary. https://www.anthropic.com/news/disrupting-AI-espionage
-
-[^2]: 同上, "AI-driven autonomous operations under human oversight" セクション
-
-[^3]: 同上, "Operational tempo achieved" の記述
-
-[^4]: 同上, "Human operators maintained minimal direct involvement" の記述
-
-[^5]: 同上, "Attack Lifecycle and AI Integration" セクション, Phase 1-6の詳細
-
-[^6]: 同上, "GTG-1002 represents multiple firsts in AI-enabled threat actor capabilities" の記述
-
-[^7]: 同上, "This activity represents a significant escalation from the earlier 'vibe hacking' discovery" の記述
-
-[^8]: 同上, "While we only have visibility into Claude usage" の記述
-
----
-
 ## II. 【構造的盲点】なぜ我々は気づかないのか
 
 ### 2-1. ロシアの格言と鄧小平理論のAI版
@@ -564,52 +544,6 @@ CEO/経営会議
 結論: オープンソースは透明性の錯覚を生みますが、実際の安全性を保証するものではありません。
 
 もちろん、DeepSeek R1 のようなモデルを中国管轄外の環境でネットワーク遮断してローカル実行するケースは、このリスクプロファイルとは異なる。本稿が主に問題にしているのは、「中華クラウド／SaaSとして提供されるAIサービス」に機密データを預ける使い方である。
-
----
-
-## 脚注・参考文献（第II章追加分）
-
-[^9]: Deng Xiaoping's "Hide and Bide" strategy (韜光養晦), 1990年代の中国外交方針として知られる。詳細は: 中国外交部公式文書、および Yan Xuetong "The Rise of China in Chinese Eyes" (2001)
-
-[^10]: 中国の海外工作ネットワークについては、Safeguard Defenders "110 Overseas: Chinese Transnational Policing Gone Wild" (2022) および "Involuntary Returns" (2023) 参照
-
-[^11]: 中国天網工程の公式情報: 中国公安部、各地方政府の調達文書、技術仕様書等。概要は BBC "In Your Face: China's all-seeing state" (2017) でも報道
-
-[^12]: South China Morning Post "Facial recognition leads to arrest of wanted man at Jacky Cheung concert" (2018年5月)
-
-[^13]: BBC "In Your Face: China's all-seeing state" by John Sudworth (2017年12月)。記者自身が実験台となり、7分で特定された
-
-[^14]: AFP, Reuters等の報道 (2018-2019年)。深圳市交通警察の公式発表も存在
-
-[^15]: 中国各地の公安機関調達文書、特に「公安視頻監控建設連網応用示範城市」関連の技術仕様書。「以图搜人」「三網融合」等の記述が散見される
-
-[^16]: Zeng, Zhong, et al. "WebFace260M: A Benchmark Unveiling the Power of Million-Scale Deep Face Recognition." CVPR 2021. 数億枚規模の顔画像データセットを用いた大規模顔認証研究
-
-[^17]: DeepSeek公式サイト https://www.deepseek.com/ および技術レポート "DeepSeek-R1" (2025年1月)
-
-[^18]: Moonshot AI公式サイト https://www.moonshot.cn/ Kimiの200万トークンコンテキストは2024年に発表
-
-[^19]: Alibaba Cloud公式 Qwen GitHub repository https://github.com/QwenLM/Qwen Apache 2.0ライセンス
-
-[^20]: 中華人民共和国「国家情報法」（2017年6月28日施行）第7条。英訳: "Any organization or citizen shall support, assist and cooperate with the state intelligence work in accordance with the law"
-
-[^21]: 価格比較は各社公式料金表より。Alibaba Cloud は同等スペックでAWS比30-50%安いケースが多い
-
-[^22]: このポイントはAnthropicレポートでも強調されている: "This case study likely reflects consistent behavioral patterns across cutting-edge AI models"
-
-[^23]: 中国「サイバーセキュリティ法」(2017年)、「データセキュリティ法」(2021年) も同様の政府アクセス条項を含む
-
-[^24]: 第一次世界大戦前の経済的相互依存と戦争勃発については、Norman Angell "The Great Illusion" (1909) が皮肉にも「経済的相互依存が戦争を不可能にする」と主張したが、1914年に第一次大戦が勃発した
-
-[^25]: popIn Aladdinのプライバシーポリシーおよび通信先分析。詳細は筆者（ノリ）の過去調査 https://qiita.com/n_hiraoka/items/26132d3c20e88f535c56
-
-[^26]: IHS Markit "Video Surveillance Market Share Report" (2020-2023)。Hikvision約40%、Dahua約15%でトップ2
-
-[^46]: 知乎専欄「改革开放究竟改变了什么？」[https://zhuanlan.zhihu.com/p/410283757](https://zhuanlan.zhihu.com/p/410283757) （改革開放を「全世界の資本家に発財のチャンスを与える」と表現）
-
-[^47]: 《中国现代化研究通讯》第4期（1997年）に掲載された経済グローバル化論考。「送上门来的資金・技术・就业机会」という表現を用いて、外資流入を論じる。
-
-[^48]: 沈宏「法治才是核心技术」中国人権捍衛者(Human Rights in China)双週刊。中国が「中国市場をエサにして、外国企業に低価格で技術を譲渡させてきた」と整理。
 
 ---
 
@@ -1280,32 +1214,6 @@ AIサービスにも、同じ仕組みが必要だ。**「データ成分表示�
 
 ---
 
-## 脚注・参考文献（第III章追加分）
-
-[^27]: EU GDPR第13条・第14条は、データ収集時の詳細な情報提供義務を定めている。データ成分表示はこれをさらに視覚化・簡素化したもの
-
-[^28]: 米国「栄養表示教育法」(Nutrition Labeling and Education Act, NLEA, 1990)。FDA実施後、消費者行動研究で効果が実証されている。参考: Journal of Consumer Research等
-
-[^29]: ノリ（平岡紀彦）「IoT機器の個人情報海外転送を可視化する『情報転送ラベル』の提案」Qiita, 2025年1月 https://qiita.com/n_hiraoka/items/26132d3c20e88f535c56
-
-[^30]: WTO「政府調達協定」(GPA)は無差別原則を定めるが、安全保障上の例外規定（第3条）も存在する
-
-[^31]: Transparency International "Corruption Perceptions Index 2024"。中国76位/180カ国、日本18位、米国24位
-
-[^32]: World Justice Project "Rule of Law Index 2024"。中国95位/142カ国
-
-[^33]: EU司法裁判所 "Schrems II" 判決 (C-311/18, 2020年7月)。米国のFISA等の監視法制がEU基本権憲章と「本質的に同等」の保護を提供していないと判断
-
-[^34]: 米国「組織犯罪対策法」(Racketeer Influenced and Corrupt Organizations Act, RICO, 1970)。民事訴訟で実損の3倍の賠償を認める
-
-[^35]: Edward Snowden (2013) NSA PRISM等の監視プログラムを暴露。詳細は The Guardian, Washington Post等の報道
-
-[^36]: U.S. Securities and Exchange Commission "Whistleblower Program"。2012年開始以降、累計18億ドル以上の報奨金支払い。最高額は2020年の114百万ドル
-
-[^37]: 米国「CHIPS and Science Act」(2022年)。半導体製造に527億ドルの補助金・税制優遇
-
----
-
 ## IV. 【時間軸】なぜ今すぐ行動すべきか
 
 ### 4-1. 台湾有事のカウントダウン
@@ -1727,22 +1635,6 @@ Anthropic報告書は、さらに不吉な事実を明らかにしている。
 
 ---
 
-## 脚注・参考文献（第IV章追加分）
-
-[^38]: 米国防総省「China Military Power Report 2021-2024」各年版。2021年に当時のインド太平洋軍司令官Philip Davidson提督が議会証言で「中国は6年以内（2027年まで）に台湾侵攻能力を整える」と警告。後継者も同様の懸念を表明
-
-[^39]: 習近平は2022年10月の第20回党大会で異例の3期目に入った。2027年は人民解放軍創設100周年（1927年8月1日の南昌起義から）
-
-[^40]: Anthropic報告書 "Implications for Cybersecurity" セクション。"systematic evaluations showing cyber capabilities doubling in six months" の記述
-
-[^41]: 英国政府 2020年7月決定。Huawei 5G機器を2027年までに全面撤去。総コスト約20億ポンド。National Cyber Security Centre (NCSC) の勧告に基づく
-
-[^42]: 「茹でガエル」の比喩は科学的には不正確（実際のカエルは逃げる）だが、比喩としては有効。徐々に悪化する状況への人間の適応を表す
-
-[^43]: 第一次大戦前の経済的相互依存と戦争勃発については、Norman Angell "The Great Illusion" (1909) が皮肉にも「経済的相互依存が戦争を不可能にする」と主張したが、1914年に第一次大戦が勃発。第二次大戦前のドイツと欧州の経済関係についても同様
-
----
-
 ## V. 【結語】文明の選択
 
 ### 5-1. 便利さか、自由か
@@ -1928,3 +1820,117 @@ AIサービス・アプリが、どの国にデータを送信し、どの法律
 ---
 
 **本記事の無断転載を禁じます。ただし、非営利目的での引用・共有は歓迎します。その際は出典を明記してください。**
+
+
+## 脚注・参考文献
+
+### 脚注・参考文献（第I章）
+
+[^1]: Anthropic (2025). "Disrupting the first reported AI-orchestrated cyber espionage campaign - Full Report", November 2025. Executive Summary. https://www.anthropic.com/news/disrupting-AI-espionage
+
+[^2]: 同上, "AI-driven autonomous operations under human oversight" セクション
+
+[^3]: 同上, "Operational tempo achieved" の記述
+
+[^4]: 同上, "Human operators maintained minimal direct involvement" の記述
+
+[^5]: 同上, "Attack Lifecycle and AI Integration" セクション, Phase 1-6の詳細
+
+[^6]: 同上, "GTG-1002 represents multiple firsts in AI-enabled threat actor capabilities" の記述
+
+[^7]: 同上, "This activity represents a significant escalation from the earlier 'vibe hacking' discovery" の記述
+
+[^8]: 同上, "While we only have visibility into Claude usage" の記述
+
+### 脚注・参考文献（第II章）
+
+[^9]: Deng Xiaoping's "Hide and Bide" strategy (韜光養晦), 1990年代の中国外交方針として知られる。詳細は: 中国外交部公式文書、および Yan Xuetong "The Rise of China in Chinese Eyes" (2001)
+
+[^10]: 中国の海外工作ネットワークについては、Safeguard Defenders "110 Overseas: Chinese Transnational Policing Gone Wild" (2022) および "Involuntary Returns" (2023) 参照
+
+[^11]: 中国天網工程の公式情報: 中国公安部、各地方政府の調達文書、技術仕様書等。概要は BBC "In Your Face: China's all-seeing state" (2017) でも報道
+
+[^12]: South China Morning Post "Facial recognition leads to arrest of wanted man at Jacky Cheung concert" (2018年5月)
+
+[^13]: BBC "In Your Face: China's all-seeing state" by John Sudworth (2017年12月)。記者自身が実験台となり、7分で特定された
+
+[^14]: AFP, Reuters等の報道 (2018-2019年)。深圳市交通警察の公式発表も存在
+
+[^15]: 中国各地の公安機関調達文書、特に「公安視頻監控建設連網応用示範城市」関連の技術仕様書。「以图搜人」「三網融合」等の記述が散見される
+
+[^16]: Zeng, Zhong, et al. "WebFace260M: A Benchmark Unveiling the Power of Million-Scale Deep Face Recognition." CVPR 2021. 数億枚規模の顔画像データセットを用いた大規模顔認証研究
+
+[^17]: DeepSeek公式サイト https://www.deepseek.com/ および技術レポート "DeepSeek-R1" (2025年1月)
+
+[^18]: Moonshot AI公式サイト https://www.moonshot.cn/ Kimiの200万トークンコンテキストは2024年に発表
+
+[^19]: Alibaba Cloud公式 Qwen GitHub repository https://github.com/QwenLM/Qwen Apache 2.0ライセンス
+
+[^20]: 中華人民共和国「国家情報法」（2017年6月28日施行）第7条。英訳: "Any organization or citizen shall support, assist and cooperate with the state intelligence work in accordance with the law"
+
+[^21]: 価格比較は各社公式料金表より。Alibaba Cloud は同等スペックでAWS比30-50%安いケースが多い
+
+[^22]: このポイントはAnthropicレポートでも強調されている: "This case study likely reflects consistent behavioral patterns across cutting-edge AI models"
+
+[^23]: 中国「サイバーセキュリティ法」(2017年)、「データセキュリティ法」(2021年) も同様の政府アクセス条項を含む
+
+[^24]: 第一次世界大戦前の経済的相互依存と戦争勃発については、Norman Angell "The Great Illusion" (1909) が皮肉にも「経済的相互依存が戦争を不可能にする」と主張したが、1914年に第一次大戦が勃発した
+
+[^25]: popIn Aladdinのプライバシーポリシーおよび通信先分析。詳細は筆者（ノリ）の過去調査 https://qiita.com/n_hiraoka/items/26132d3c20e88f535c56
+
+[^26]: IHS Markit "Video Surveillance Market Share Report" (2020-2023)。Hikvision約40%、Dahua約15%でトップ2
+
+
+### 脚注・参考文献（第III章）
+
+[^27]: EU GDPR第13条・第14条は、データ収集時の詳細な情報提供義務を定めている。データ成分表示はこれをさらに視覚化・簡素化したもの
+
+[^28]: 米国「栄養表示教育法」(Nutrition Labeling and Education Act, NLEA, 1990)。FDA実施後、消費者行動研究で効果が実証されている。参考: Journal of Consumer Research等
+
+[^29]: ノリ（平岡紀彦）「IoT機器の個人情報海外転送を可視化する『情報転送ラベル』の提案」Qiita, 2025年1月 https://qiita.com/n_hiraoka/items/26132d3c20e88f535c56
+
+[^30]: WTO「政府調達協定」(GPA)は無差別原則を定めるが、安全保障上の例外規定（第3条）も存在する
+
+[^31]: Transparency International "Corruption Perceptions Index 2024"。中国76位/180カ国、日本18位、米国24位
+
+[^32]: World Justice Project "Rule of Law Index 2024"。中国95位/142カ国
+
+[^33]: EU司法裁判所 "Schrems II" 判決 (C-311/18, 2020年7月)。米国のFISA等の監視法制がEU基本権憲章と「本質的に同等」の保護を提供していないと判断
+
+[^34]: 米国「組織犯罪対策法」(Racketeer Influenced and Corrupt Organizations Act, RICO, 1970)。民事訴訟で実損の3倍の賠償を認める
+
+[^35]: Edward Snowden (2013) NSA PRISM等の監視プログラムを暴露。詳細は The Guardian, Washington Post等の報道
+
+[^36]: U.S. Securities and Exchange Commission "Whistleblower Program"。2012年開始以降、累計18億ドル以上の報奨金支払い。最高額は2020年の114百万ドル
+
+[^37]: 米国「CHIPS and Science Act」(2022年)。半導体製造に527億ドルの補助金・税制優遇
+
+### 脚注・参考文献（第IV章）
+
+[^38]: 米国防総省「China Military Power Report 2021-2024」各年版。2021年に当時のインド太平洋軍司令官Philip Davidson提督が議会証言で「中国は6年以内（2027年まで）に台湾侵攻能力を整える」と警告。後継者も同様の懸念を表明
+
+[^39]: 習近平は2022年10月の第20回党大会で異例の3期目に入った。2027年は人民解放軍創設100周年（1927年8月1日の南昌起義から）
+
+[^40]: Anthropic報告書 "Implications for Cybersecurity" セクション。"systematic evaluations showing cyber capabilities doubling in six months" の記述
+
+[^41]: 英国政府 2020年7月決定。Huawei 5G機器を2027年までに全面撤去。総コスト約20億ポンド。National Cyber Security Centre (NCSC) の勧告に基づく
+
+[^42]: 「茹でガエル」の比喩は科学的には不正確（実際のカエルは逃げる）だが、比喩としては有効。徐々に悪化する状況への人間の適応を表す
+
+[^43]: 第一次大戦前の経済的相互依存と戦争勃発については、Norman Angell "The Great Illusion" (1909) が皮肉にも「経済的相互依存が戦争を不可能にする」と主張したが、1914年に第一次大戦が勃発。第二次大戦前のドイツと欧州の経済関係についても同様
+
+### 脚注・参考文献（第V章）
+
+[^44]: Benjamin Franklin (1755). "Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety"
+
+[^45]: Winston Churchill (1947年11月11日). "Democracy is the worst form of government, except for all those other forms"
+
+### 脚注・参考文献（追加）
+
+[^46]: 知乎専欄「改革开放究竟改变了什么？」[https://zhuanlan.zhihu.com/p/410283757](https://zhuanlan.zhihu.com/p/410283757) （改革開放を「全世界の資本家に発財のチャンスを与える」と表現）
+
+[^47]: 《中国现代化研究通讯》第4期（1997年）に掲載された経済グローバル化論考。「送上门来的資金・技术・就业机会」という表現を用いて、外資流入を論じる。
+
+[^48]: 沈宏「法治才是核心技术」中国人権捍衛者(Human Rights in China)双週刊。中国が「中国市場をエサにして、外国企業に低価格で技術を譲渡させてきた」と整理。
+
+
