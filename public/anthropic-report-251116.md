@@ -7,7 +7,7 @@ tags:
   - データ主権
   - 国際情勢
 private: false
-updated_at: '2025-11-16T23:28:44+09:00'
+updated_at: '2025-11-16T23:44:43+09:00'
 id: 7be3448b8b0d886790ba
 organization_url_name: null
 slide: false
