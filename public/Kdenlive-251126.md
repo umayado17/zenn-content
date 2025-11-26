@@ -1,11 +1,16 @@
 ---
-title: "【4: 安全】Kdenlive の安全性調査レポート - 透明性の高いオープンソース動画編集ソフト"
-tags: [AI, Security, Kdenlive, OpenSource, VideoEditing]
+title: '【4: 安全】Kdenlive の安全性調査レポート - 透明性の高いオープンソース動画編集ソフト'
+tags:
+  - Security
+  - OpenSource
+  - AI
+  - videoediting
+  - kdenlive
 private: false
+updated_at: '2025-11-26T11:29:56+09:00'
+id: 15e30627da01b16969a4
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
