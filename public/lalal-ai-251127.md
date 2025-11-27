@@ -1,11 +1,16 @@
 ---
-title: "【0: 使用不可】LALAL.AI 安全性調査レポート：バイオメトリクスデータをロシア企業に送る危険性"
-tags: [AI, Security, Russia, GeopoliticalRisk, Privacy]
+title: '【0: 使用不可】LALAL.AI 安全性調査レポート：バイオメトリクスデータをロシア企業に送る危険性'
+tags:
+  - Security
+  - AI
+  - Russia
+  - privacy
+  - GeopoliticalRisk
 private: false
+updated_at: '2025-11-28T01:13:59+09:00'
+id: 807344c19cc6a0a0403f
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
