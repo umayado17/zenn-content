@@ -7,8 +7,8 @@ tags:
   - 裁判記録
   - 歴史資料
 private: false
-updated_at: ''
-id: null
+updated_at: '2025-12-09T01:36:20+09:00'
+id: 69c29d38a81e5b87a7eb
 organization_url_name: null
 slide: false
 ignorePublish: false
