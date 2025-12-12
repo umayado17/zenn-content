@@ -7,7 +7,7 @@ tags:
   - 中国
   - ブラウザ拡張
 private: false
-updated_at: '2025-12-12T13:19:33+09:00'
+updated_at: '2025-12-12T13:25:43+09:00'
 id: 5de53389b5663f81c283
 organization_url_name: null
 slide: false
