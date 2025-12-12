@@ -1,11 +1,17 @@
 ---
-title: "【警告】デジタル冊封体制とは何か —— 中華系テクノロジーが構築する現代版華夷秩序の全体像"
-tags: [Security, 地政学, China, AI, IoT]
+title: 【警告】デジタル冊封体制とは何か —— 中華系テクノロジーが構築する現代版華夷秩序の全体像
+tags:
+  - Security
+  - AI
+  - IoT
+  - CHINA
+  - 地政学
 private: false
-updated_at: null 
-id: null
+updated_at: '2025-12-12T14:13:09+09:00'
+id: 830bdbd5be6a50796953
 organization_url_name: null
 slide: false
+ignorePublish: false
 ---
 
 TikTokを使い、DeepSeekに質問し、BYDに乗り、DJIのドローンを飛ばす。これらの行為は「便利なサービスの利用」ではない。**「デジタル冊封体制」への参加**——すなわち、あなたのデータとシステム権限を「朝貢」し、「便利さ」という下賜品を受け取る構造に組み込まれることを意味する。
