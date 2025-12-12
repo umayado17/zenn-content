@@ -1,12 +1,17 @@
 ---
-title: "【0: 使用不可】ShadyPanda事件が証明した「デジタル冊封体制」—— 430万人が知らずに朝貢していた7年間"
-tags: [Security, Chrome, Edge, ブラウザ拡張, 中国]
-private: false              # true: 限定共有 / false: 公開
-updated_at: ""              # 投稿時に自動で更新日時が入る
-id: null                    # 投稿時に自動で記事UUIDが入る
-organization_url_name: null # 所属OrganizationがあればそのURL名
-slide: false                # true: スライドモードON
-ignorePublish: false        # true: publish時に無視する
+title: '【0: 使用不可】ShadyPanda事件が証明した「デジタル冊封体制」—— 430万人が知らずに朝貢していた7年間'
+tags:
+  - Chrome
+  - Security
+  - Edge
+  - 中国
+  - ブラウザ拡張
+private: false
+updated_at: '2025-12-12T13:19:33+09:00'
+id: 5de53389b5663f81c283
+organization_url_name: null
+slide: false
+ignorePublish: false
 ---
 
 Chrome・Edge向けブラウザ拡張機能145本以上が、7年間にわたりスパイウェアとして機能していた事件が発覚した。被害規模は430万インストールに達し、収集されたデータは中国国内のサーバー群に送信されていた。
@@ -149,7 +154,7 @@ Starlab Technology名義でEdge向けに投入されたWeTab系拡張（5本、�
 本事件で検出された厚黒学的要素：
 
 - [x] 誇張的キャッチコピー（「ブラウザを高速化」等）
-- [x] “無料”条件の隠蔽（データ収集が真の対価）
+- [x] 無料条件の隠蔽（データ収集が真の対価）
 - [x] 段階的な権限要求（最初は無害→徐々に拡大）
 - [x] ToS深層条項（目立たない箇所でのデータ利用許諾）
 - [x] オプトアウト選択肢欠如
