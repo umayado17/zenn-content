@@ -1,5 +1,5 @@
 ---
-title: “【0: 使用不可】ShadyPanda事件が証明した「デジタル冊封体制」—— 430万人が知らずに朝貢していた7年間”
+title: "【0: 使用不可】ShadyPanda事件が証明した「デジタル冊封体制」—— 430万人が知らずに朝貢していた7年間"
 tags: [Security, Chrome, Edge, ブラウザ拡張, 中国]
 private: false              # true: 限定共有 / false: 公開
 updated_at: ""              # 投稿時に自動で更新日時が入る
