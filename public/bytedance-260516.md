@@ -1,11 +1,16 @@
 ---
-title: "【レベル0】ByteDance「豆包/Cici/Dola」の利用規約二重構造:一次資料で読み解く『不矛盾な空白』という構造的欺瞞"
-tags: [AI, セキュリティ, 中国, プライバシー, ByteDance]
+title: '【レベル0】ByteDance「豆包/Cici/Dola」の利用規約二重構造:一次資料で読み解く『不矛盾な空白』という構造的欺瞞'
+tags:
+  - Security
+  - AI
+  - 中国
+  - プライバシー
+  - ByteDance
 private: false
+updated_at: '2026-05-16T22:25:54+09:00'
+id: 10b48b691c15751c355c
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
