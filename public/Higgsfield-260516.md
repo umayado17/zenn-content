@@ -1,11 +1,16 @@
 ---
-title: "【安全性レベル0】Higgsfield AIの安全性調査レポート ― 米国法人の表層に隠れた「ロシア圏×中国×米国」三重管轄リスクと生体情報の永続的搾取"
-tags: [AI, Security, Higgsfield, China, Russia]
+title: 【安全性レベル0】Higgsfield AIの安全性調査レポート ― 米国法人の表層に隠れた「ロシア圏×中国×米国」三重管轄リスクと生体情報の永続的搾取
+tags:
+  - Security
+  - AI
+  - CHINA
+  - Russia
+  - Higgsfield
 private: false
+updated_at: '2026-05-16T22:04:56+09:00'
+id: 43e124ede40e495ed082
+organization_url_name: null
 slide: false
-organization_url_name: ""
-id: ""
-updated_at: ""
 ignorePublish: false
 ---
 
