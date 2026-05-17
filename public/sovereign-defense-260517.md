@@ -2,13 +2,13 @@
 title: 電子・バイオ融合時代の主権防衛——トランプ訪中時の防諜措置を起点とした構造的考察
 tags:
   - Security
-  - サイバーセキュリティ
   - AI
+  - サイバーセキュリティ
   - 中国
   - 地政学
 private: false
-updated_at: ''
-id: ''
+updated_at: '2026-05-17T17:07:02+09:00'
+id: b41c70198d08ad662707
 organization_url_name: null
 slide: false
 ignorePublish: false
