@@ -3,12 +3,12 @@ title: 【中華AIウォッチ】MeiGen / meigen.ai — ByteDance系モデル供
 tags:
   - Security
   - AI
-  - 中華AI
   - サプライチェーン
   - OSINT
+  - 中華AI
 private: false
-updated_at: ''
-id: ''
+updated_at: '2026-05-31T21:00:34+09:00'
+id: 3ec027709a74481abb8b
 organization_url_name: null
 slide: false
 ignorePublish: false
