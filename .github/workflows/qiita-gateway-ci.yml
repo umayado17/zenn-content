@@ -1,0 +1,27 @@
+name: Qiita Gateway CI
+
+on:
+  pull_request:
+    paths:
+      - 'tools/qiita_gateway.py'
+      - 'test/test_qiita_gateway.py'
+      - '.github/workflows/publish.yml'
+      - '.github/workflows/qiita-gateway-ci.yml'
+      - 'docs/QIITA_DEPLOYMENT_GATEWAY_CONTRACT_v1_0.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile
+        run: python -m py_compile tools/qiita_gateway.py test/test_qiita_gateway.py
+      - name: Unit tests
+        run: python -m unittest discover -v -s test -p 'test_qiita_gateway.py'
