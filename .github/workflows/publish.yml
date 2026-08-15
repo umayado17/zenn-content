@@ -1,209 +1,339 @@
-# .github/workflows/qiita-publish.yml
-name: Publish changed articles to Qiita
+name: Publish approved article to Qiita
 
 on:
   push:
-    branches: [ main, master ]
-    paths: [ 'public/**' ]   # public配下の変更のみで起動
-  workflow_dispatch:
-    inputs:
-      force_full:
-        description: '全記事を対象にする（トラブルシュート用）'
-        required: false
-        type: boolean
-        default: false
+    branches: [main]
+    paths:
+      - 'public/**'
+      - '.qiita-gateway/requests/**'
 
 permissions:
   contents: write
 
+concurrency:
+  group: qiita-gateway-${{ github.sha }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      QIITA_API_BASE: https://qiita.com/api/v2
     steps:
-      - name: Checkout
+      - name: Checkout exact publication commit
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # 差分取得のため履歴が必要
+          fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '18'
+          python-version: '3.12'
 
-      - run: npm i @qiita/qiita-cli --save-dev
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Setup Qiita CLI credentials
+      - name: Detect Gateway request
+        id: detect
         shell: bash
         run: |
+          set -euo pipefail
+          BASE_SHA="${{ github.event.before }}"
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+          git diff --name-only --diff-filter=ACMR "$BASE_SHA" HEAD > /tmp/changed-files.txt
+          echo "base_sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+
+          mapfile -t REQUESTS < <(grep -E '^\.qiita-gateway/requests/[^/]+\.json$' /tmp/changed-files.txt || true)
+          if [ "${#REQUESTS[@]}" -eq 0 ]; then
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            echo "No new Qiita Gateway request in this commit; publication is not authorized."
+            exit 0
+          fi
+          if [ "${#REQUESTS[@]}" -ne 1 ]; then
+            echo "Expected exactly one Qiita Gateway request, found ${#REQUESTS[@]}" >&2
+            exit 2
+          fi
+          echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          echo "request_path=${REQUESTS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Run Gateway unit tests
+        if: steps.detect.outputs.should_publish == 'true'
+        run: python -m unittest discover -v -s test -p 'test_qiita_gateway.py'
+
+      - name: Validate approved publication package
+        if: steps.detect.outputs.should_publish == 'true'
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/qiita_gateway.py preflight \
+            --request "${{ steps.detect.outputs.request_path }}" \
+            --changed-files /tmp/changed-files.txt \
+            --github-output "$GITHUB_OUTPUT"
+
+          BASE_SHA="${{ steps.detect.outputs.base_sha }}"
+          REQUEST_PATH="${{ steps.detect.outputs.request_path }}"
+          ARTICLE_PATH="$(grep '^article_path=' "$GITHUB_OUTPUT" | tail -1 | cut -d= -f2-)"
+          ACTION="$(grep '^action=' "$GITHUB_OUTPUT" | tail -1 | cut -d= -f2-)"
+
+          if git cat-file -e "$BASE_SHA:$REQUEST_PATH" 2>/dev/null; then
+            echo "Gateway request already existed before this commit; requests are immutable and one-shot." >&2
+            exit 2
+          fi
+
+          if [ "$ACTION" = "publish_new" ]; then
+            if git cat-file -e "$BASE_SHA:$ARTICLE_PATH" 2>/dev/null; then
+              echo "publish_new may not overwrite an article path that already existed." >&2
+              exit 2
+            fi
+          else
+            if ! git cat-file -e "$BASE_SHA:$ARTICLE_PATH" 2>/dev/null; then
+              echo "update_existing requires an article that existed before this commit." >&2
+              exit 2
+            fi
+          fi
+
+      - name: Refuse replay of a request with durable result
+        if: steps.detect.outputs.should_publish == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          RESULT_PATH=".qiita-gateway/results/${{ steps.preflight.outputs.request_id }}.json"
+          if git cat-file -e "origin/main:$RESULT_PATH" 2>/dev/null; then
+            echo "A durable result already exists for this request. Automatic replay is prohibited." >&2
+            exit 3
+          fi
+
+      - name: Install Qiita CLI
+        if: steps.detect.outputs.should_publish == 'true'
+        run: npm install --no-save @qiita/qiita-cli
+
+      - name: Setup Qiita credentials securely
+        if: steps.detect.outputs.should_publish == 'true'
+        shell: bash
+        env:
+          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$QIITA_TOKEN"
           mkdir -p ~/.config/qiita-cli
-          cat > ~/.config/qiita-cli/credentials.json <<'EOF'
+          chmod 700 ~/.config/qiita-cli
+          cat > ~/.config/qiita-cli/credentials.json <<EOF
           {
             "default": "default",
             "credentials": [
               {
                 "name": "default",
-                "accessToken": "${{ secrets.QIITA_TOKEN }}"
+                "accessToken": "$QIITA_TOKEN"
               }
             ]
           }
           EOF
-          echo "== credentials.json =="
-          cat ~/.config/qiita-cli/credentials.json
-                    
-      # front matter の型崩れ予防。新規は `id: ""` が前提。
-      - name: Sanitize front matter
-        run: |
-          find public -name '*.md' -print0 | xargs -0 sed -i 's/^id:\s*null\s*$/id: ""/'
-          find public -name '*.md' -print0 | xargs -0 sed -i 's/^updated_at:\s*".*"\s*$/updated_at: ""/'
-          # 全角引用符の除去（誤パース対策）
-          find public -name '*.md' -print0 | xargs -0 sed -i 's/[“”]//g'
+          chmod 600 ~/.config/qiita-cli/credentials.json
 
-      # 今回の push で変わった md を抽出（追加/変更/リネーム）
-      - name: Detect changed markdowns
-        id: diff
+      - name: Check for an already-completed remote side effect
+        if: steps.detect.outputs.should_publish == 'true'
+        id: prereconcile
         shell: bash
+        env:
+          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
         run: |
           set -euo pipefail
-          BASE_SHA="${{ github.event.before }}"
-          # 手動実行 or beforeが取れないケースのフォールバック
-          if [ -z "${BASE_SHA}" ] || ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
-            BASE_SHA="$(git rev-parse HEAD~1)"
+          REQUEST="${{ steps.detect.outputs.request_path }}"
+          ACTION="${{ steps.preflight.outputs.action }}"
+          EXISTING_ID="${{ steps.preflight.outputs.existing_qiita_item_id }}"
+          rm -f /tmp/qiita-pre.json /tmp/qiita-remote.json
+
+          if [ "$ACTION" = "update_existing" ]; then
+            curl --fail --silent --show-error \
+              -H "Authorization: Bearer $QIITA_TOKEN" \
+              "$QIITA_API_BASE/items/$EXISTING_ID" \
+              -o /tmp/qiita-pre.json
+          else
+            curl --fail --silent --show-error \
+              -H "Authorization: Bearer $QIITA_TOKEN" \
+              "$QIITA_API_BASE/authenticated_user/items?page=1&per_page=100" \
+              -o /tmp/qiita-pre.json
           fi
 
-          if [ "${{ inputs.force_full || false }}" = "true" ]; then
-            echo "files<<EOF" >> $GITHUB_OUTPUT
-            find public -name '*.md' | sort >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+          set +e
+          python tools/qiita_gateway.py select-remote \
+            --request "$REQUEST" \
+            --items-json /tmp/qiita-pre.json \
+            --output /tmp/qiita-remote.json
+          SELECT_RC=$?
+          set -e
+
+          if [ "$SELECT_RC" -eq 0 ]; then
+            ITEM_ID="$(python -c 'import json; print(json.load(open("/tmp/qiita-remote.json"))["id"])')"
+            python tools/qiita_gateway.py bind-item-id \
+              --article "${{ steps.preflight.outputs.article_path }}" \
+              --item-id "$ITEM_ID"
+            echo "skip_publish=true" >> "$GITHUB_OUTPUT"
+            echo "Existing remote item exactly matches approved content; publish side effect will not be repeated."
+          elif [ "$SELECT_RC" -eq 1 ]; then
+            echo "skip_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Remote reconciliation was ambiguous or invalid; refusing publication." >&2
+            exit "$SELECT_RC"
+          fi
+
+      - name: Publish exact approved article
+        if: steps.detect.outputs.should_publish == 'true' && steps.prereconcile.outputs.skip_publish != 'true'
+        id: qiita_publish
+        shell: bash
+        run: |
+          set +e
+          npx qiita publish "${{ steps.preflight.outputs.article_name }}" --verbose
+          CLI_RC=$?
+          set -e
+          echo "cli_exit_code=$CLI_RC" >> "$GITHUB_OUTPUT"
+          echo "Qiita CLI exit code: $CLI_RC"
+
+      - name: Reconcile Qiita remote item after publish attempt
+        if: steps.detect.outputs.should_publish == 'true'
+        id: reconcile
+        shell: bash
+        env:
+          QIITA_TOKEN: ${{ secrets.QIITA_TOKEN }}
+        run: |
+          set -euo pipefail
+          REQUEST="${{ steps.detect.outputs.request_path }}"
+          ARTICLE="${{ steps.preflight.outputs.article_path }}"
+          rm -f /tmp/qiita-remote.json /tmp/qiita-items-post.json
+
+          if [ "${{ steps.prereconcile.outputs.skip_publish }}" = "true" ]; then
+            ITEM_ID="$(python tools/qiita_gateway.py item-id --article "$ARTICLE")"
+            curl --fail --silent --show-error \
+              -H "Authorization: Bearer $QIITA_TOKEN" \
+              "$QIITA_API_BASE/items/$ITEM_ID" \
+              -o /tmp/qiita-remote.json
+            echo "cli_exit_code=0" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          CHANGED=$(git diff --name-only --diff-filter=ACMR "${BASE_SHA}" HEAD | grep -E '^public/.*\.md$' || true)
+          CLI_RC="${{ steps.qiita_publish.outputs.cli_exit_code }}"
+          [ -n "$CLI_RC" ] || CLI_RC=1
+          echo "cli_exit_code=$CLI_RC" >> "$GITHUB_OUTPUT"
 
-          # 画像等のアセットが変わったら、参照していそうなmdを広めに拾う（簡易版）
-          ASSET_CHANGED=$(git diff --name-only --diff-filter=ACMR "${BASE_SHA}" HEAD | grep -E '^public/.*\.(png|jpg|jpeg|gif|svg|webp)$' || true)
-          if [ -n "${ASSET_CHANGED}" ]; then
-            # アセットが変わったら public/*.md を全取得（厳密に参照追跡するより安全）
-            CHANGED="$(printf "%s\n%s" "$CHANGED" "$(find public -name '*.md') " | sort -u)"
+          ITEM_ID="$(python tools/qiita_gateway.py item-id --article "$ARTICLE")"
+          if [ -n "$ITEM_ID" ]; then
+            if curl --fail --silent --show-error \
+              -H "Authorization: Bearer $QIITA_TOKEN" \
+              "$QIITA_API_BASE/items/$ITEM_ID" \
+              -o /tmp/qiita-remote.json; then
+              exit 0
+            fi
+            rm -f /tmp/qiita-remote.json
           fi
 
-          if [ -z "${CHANGED}" ]; then
-            echo "No markdown changes."
-            echo "files=" >> $GITHUB_OUTPUT
-          else
-            echo "Changed files:"
-            echo "${CHANGED}"
-            echo "files<<EOF" >> $GITHUB_OUTPUT
-            echo "${CHANGED}" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+          curl --fail --silent --show-error \
+            -H "Authorization: Bearer $QIITA_TOKEN" \
+            "$QIITA_API_BASE/authenticated_user/items?page=1&per_page=100" \
+            -o /tmp/qiita-items-post.json
+
+          set +e
+          python tools/qiita_gateway.py select-remote \
+            --request "$REQUEST" \
+            --items-json /tmp/qiita-items-post.json \
+            --output /tmp/qiita-remote.json
+          SELECT_RC=$?
+          set -e
+          if [ "$SELECT_RC" -eq 0 ]; then
+            ITEM_ID="$(python -c 'import json; print(json.load(open("/tmp/qiita-remote.json"))["id"])')"
+            python tools/qiita_gateway.py bind-item-id --article "$ARTICLE" --item-id "$ITEM_ID"
+          elif [ "$SELECT_RC" -ne 1 ]; then
+            echo "Post-publish reconciliation is ambiguous." >&2
+            exit "$SELECT_RC"
           fi
 
-      # 1本ずつ publish（どれで落ちたか判別しやすく、部分成功も可）
-      - name: Publish changed markdowns
-        if: steps.diff.outputs.files != ''
+      - name: Write durable publication result
+        if: steps.detect.outputs.should_publish == 'true'
+        id: result
         shell: bash
         run: |
-          set -Eeuo pipefail
-          echo "== Target files =="; printf '%s\n' "${{ steps.diff.outputs.files }}"
-      
-          echo "${{ steps.diff.outputs.files }}" | while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            [ ! -f "$f" ] && { echo "::warning::skip $f (not found)"; continue; }
-            grep -qE '^ignorePublish:\s*true' "$f" && { echo "skip $f (ignorePublish: true)"; continue; }
-      
-            # ログ用
-            echo "--- head of $f ---"; head -n 15 "$f" || true; echo "-------------------"
-      
-            # public/を外して basename（拡張子なし）に変換
-            rel="${f#public/}"                 # 例: open-creater-250812.md
-            base="${rel##*/}"                  # 例: open-creater-250812.md
-            name="${base%.md}"                 # 例: open-creater-250812  ← これを渡す
-      
-            echo "=== Publish (basename) $name ==="
-            npx qiita publish "$name" --verbose
-          done
+          set -euo pipefail
+          REMOTE_ARG=()
+          if [ -s /tmp/qiita-remote.json ]; then
+            REMOTE_ARG=(--remote-json /tmp/qiita-remote.json)
+          fi
+          python tools/qiita_gateway.py result \
+            --request "${{ steps.detect.outputs.request_path }}" \
+            "${REMOTE_ARG[@]}" \
+            --cli-exit-code "${{ steps.reconcile.outputs.cli_exit_code }}" \
+            --commit-sha "${{ github.sha }}" \
+            --workflow-run-id "${{ github.run_id }}" \
+            --github-output "$GITHUB_OUTPUT"
 
+      - name: Commit Qiita ID and publication result
+        if: steps.detect.outputs.should_publish == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "${{ steps.preflight.outputs.article_path }}" "${{ steps.result.outputs.result_path }}"
+          if git diff --cached --quiet; then
+            echo "Expected a publication result writeback but no changes were staged." >&2
+            exit 4
+          fi
+          git commit -m "chore(qiita-gateway): publication result ${{ steps.preflight.outputs.request_id }} [skip qiita-gateway]"
+          git pull --rebase origin main
+          git push origin HEAD:main
 
-      # 【新規追加】GAS通知専用ステップ
-      - name: Notify published articles to GAS
-        if: steps.diff.outputs.files != ''
+      - name: Notify GAS after confirmed publication
+        if: steps.detect.outputs.should_publish == 'true' && steps.result.outputs.publication_status == 'PUBLISHED'
         shell: bash
         env:
           GAS_WEBHOOK_URL: ${{ secrets.GAS_WEBHOOK_URL }}
           GAS_TOKEN: ${{ secrets.GAS_TOKEN }}
+          QIITA_TITLE: ${{ steps.result.outputs.qiita_title }}
+          QIITA_URL: ${{ steps.result.outputs.qiita_url }}
+          QIITA_ITEM_ID: ${{ steps.result.outputs.qiita_item_id }}
+          PUBLISHED_AT: ${{ github.event.head_commit.timestamp }}
+          REPOSITORY: ${{ github.repository }}
+          COMMIT_SHA: ${{ github.sha }}
+          REQUEST_ID: ${{ steps.preflight.outputs.request_id }}
         run: |
           set -euo pipefail
-          
-          echo "=== Collecting published articles info ==="
-          
-          echo "${{ steps.diff.outputs.files }}" | while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            [ ! -f "$f" ] && continue
-            grep -qE '^ignorePublish:\s*true' "$f" && continue
-            
-            # QiitaのIDが設定されているかチェック（公開済みの判定）
-            qiita_id=$(grep '^id:' "$f" | sed 's/^id: *"*\(.*\)"* *$/\1/' | sed 's/"$//')
-            
-            if [ -n "$qiita_id" ] && [ "$qiita_id" != "" ]; then
-              # タイトル取得
-              title=$(grep '^title:' "$f" | sed 's/^title: *"*\(.*\)"* *$/\1/' | sed 's/"$//')
-              qiita_url="https://qiita.com/items/$qiita_id"
-              
-              rel="${f#public/}"
-              base="${rel##*/}"
-              name="${base%.md}"
-              
-              echo "📝 Found published article: $title -> $qiita_url"
-              
-              # GAS通知処理
-              if [ -n "${GAS_WEBHOOK_URL:-}" ]; then
-                payload=$(cat <<EOF
-          {
-            "source": "qiita_rss",
-            "secret": "$GAS_TOKEN",
-            "serviceName": "$title",
-            "qiitaUrl": "$qiita_url",
-            "publishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "author": "$(whoami)",
-            "qiita_id": "$qiita_id",
-            "filename": "$name",
-            "repository": "${{ github.repository }}",
-            "commit_sha": "${{ github.sha }}"
-          }
-          EOF
-                )
-                
-                echo "🔔 Notifying GAS for: $title"
-                
-                curl_response=$(curl -s -w "HTTPSTATUS:%{http_code}" \
-                  -X POST \
-                  -H "Content-Type: application/json" \
-                  -d "$payload" \
-                  "$GAS_WEBHOOK_URL" || echo "HTTPSTATUS:000")
-                
-                http_code=$(echo "$curl_response" | grep -o "HTTPSTATUS:[0-9]*" | cut -d: -f2)
-                response_body=$(echo "$curl_response" | sed -E 's/HTTPSTATUS:[0-9]*$//')
-                
-                if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
-                  echo "✅ GAS notification successful for: $title"
-                  echo "Response: $response_body"
-                else
-                  echo "⚠️  GAS notification failed for: $title (HTTP $http_code)"
-                  echo "Response: $response_body"
-                fi
-              else
-                echo "⚠️  GAS_WEBHOOK_URL not set, skipping notification"
-              fi
-            else
-              echo "ℹ️  No Qiita ID found in $f (not published or failed)"
-            fi
-          done
+          if [ -z "${GAS_WEBHOOK_URL:-}" ]; then
+            echo "GAS_WEBHOOK_URL is not configured; notification skipped."
+            exit 0
+          fi
+          python - <<'PY' >/tmp/gas-payload.json
+          import json, os
+          print(json.dumps({
+              "source": "qiita_gateway",
+              "secret": os.environ.get("GAS_TOKEN", ""),
+              "serviceName": os.environ["QIITA_TITLE"],
+              "qiitaUrl": os.environ["QIITA_URL"],
+              "publishedAt": os.environ["PUBLISHED_AT"],
+              "qiita_id": os.environ["QIITA_ITEM_ID"],
+              "repository": os.environ["REPOSITORY"],
+              "commit_sha": os.environ["COMMIT_SHA"],
+              "request_id": os.environ["REQUEST_ID"],
+          }, ensure_ascii=False))
+          PY
+          curl --fail --silent --show-error \
+            -X POST -H "Content-Type: application/json" \
+            --data-binary @/tmp/gas-payload.json \
+            "$GAS_WEBHOOK_URL" >/tmp/gas-response.txt || {
+              echo "GAS notification failed after Qiita publication; publication remains PUBLISHED." >&2
+              exit 0
+            }
 
-      # 【既存処理】変更の書き戻し
-      - name: Commit & push if changed (write back IDs etc.)
+      - name: Fail closed unless publication is confirmed
+        if: steps.detect.outputs.should_publish == 'true'
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(qiita): write back item IDs"
-            git push
+          set -euo pipefail
+          STATUS="${{ steps.result.outputs.publication_status }}"
+          if [ "$STATUS" != "PUBLISHED" ]; then
+            echo "Qiita publication status is $STATUS. Automatic retry is prohibited." >&2
+            exit 5
           fi
