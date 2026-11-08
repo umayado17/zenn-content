@@ -3,9 +3,9 @@ title: '【0: 使用不可】Plaud.ai セキュリティ分析：米国企業を
 tags:
   - Security
   - AI
-  - CHINA
-  - privacy
-  - GeopoliticalRisk
+  - 中国
+  - プライバシー
+  - 地政学
 private: false
 updated_at: '2025-10-27T00:27:30+09:00'
 id: 3140fee0554df6040a2b
