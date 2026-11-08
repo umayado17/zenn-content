@@ -4,8 +4,8 @@ tags:
   - Security
   - AI
   - anything
-  - privacy
-  - nocode
+  - プライバシー
+  - ノーコード
 private: false
 updated_at: '2025-08-21T13:16:25+09:00'
 id: 5b6d6612e619c33d50a1
