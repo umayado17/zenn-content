@@ -3,9 +3,8 @@ title: '【4: 安全】moconavi（モコナビ）の安全性調査レポート'
 tags:
   - Security
   - AI
-  - enterprise
   - MAM
-  - RemoteAccess
+  - リモートアクセス
 private: false
 updated_at: '2025-08-14T16:26:19+09:00'
 id: c313639818e722d7740c
