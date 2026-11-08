@@ -3,9 +3,9 @@ title: '【0: 使用不可】Flowith：米国企業を装う中華系AI監視ツ
 tags:
   - Security
   - AI
-  - CHINA
-  - privacy
-  - GeopoliticalRisk
+  - 中国
+  - プライバシー
+  - 地政学
 private: false
 updated_at: '2025-10-03T09:14:20+09:00'
 id: 6d91e4eb69735d26eb42
