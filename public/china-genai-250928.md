@@ -2,10 +2,9 @@
 title: 中国の生成AI規制体系：技術的・法的分析レポート【2025年9月更新版】
 tags:
   - AI
-  - CHINA
-  - datasecurity
-  - regulation
-  - GenerativeAI
+  - Security
+  - 中国
+  - 生成AI
 private: false
 updated_at: '2025-09-29T11:22:12+09:00'
 id: 5ad305727e0e6bf3276f
