@@ -4,7 +4,7 @@ tags:
   - Security
   - AI
   - IoT
-  - CHINA
+  - 中国
   - 地政学
 private: false
 updated_at: '2025-12-12T14:13:09+09:00'
