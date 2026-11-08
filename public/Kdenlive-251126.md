@@ -4,7 +4,7 @@ tags:
   - Security
   - OpenSource
   - AI
-  - videoediting
+  - 動画生成
   - kdenlive
 private: false
 updated_at: '2025-11-26T11:29:56+09:00'
