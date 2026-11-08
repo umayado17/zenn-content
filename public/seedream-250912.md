@@ -3,8 +3,8 @@ title: '【0: 使用不可】Seedream V4の安全性調査レポート：史上�
 tags:
   - Security
   - AI
-  - CHINA
-  - GeopoliticalRisk
+  - 中国
+  - 地政学
   - ByteDance
 private: false
 updated_at: '2025-09-12T15:00:21+09:00'
