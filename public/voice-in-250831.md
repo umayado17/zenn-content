@@ -4,8 +4,8 @@ tags:
   - Chrome
   - Security
   - AI
-  - privacy
-  - VoiceRecognition
+  - プライバシー
+  - 音声認識
 private: false
 updated_at: '2025-08-31T14:57:01+09:00'
 id: 23067416e7f4d15dc716
