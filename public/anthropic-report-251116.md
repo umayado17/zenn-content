@@ -5,7 +5,7 @@ tags:
   - AI
   - サイバーセキュリティ
   - データ主権
-  - 国際情勢
+  - 地政学
 private: false
 updated_at: '2025-11-17T01:16:16+09:00'
 id: 7be3448b8b0d886790ba
