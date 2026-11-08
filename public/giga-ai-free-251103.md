@@ -3,9 +3,9 @@ title: '【1: 極めて危険】Giga AI Free：透明性欠如が生む法的リ
 tags:
   - Security
   - AI
-  - privacy
+  - プライバシー
   - Claude
-  - GeopoliticalRisk
+  - 地政学
 private: false
 updated_at: '2025-11-03T07:00:45+09:00'
 id: 18ba813237872c52c6d4
