@@ -4,8 +4,8 @@ tags:
   - Chrome
   - Security
   - AI
-  - privacy
-  - BrowserAutomation
+  - プライバシー
+  - ブラウザ自動化
 private: false
 updated_at: '2025-08-28T17:06:46+09:00'
 id: c89f40166baa4a16faba
