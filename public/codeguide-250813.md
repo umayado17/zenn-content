@@ -2,10 +2,8 @@
 title: '【1: 極めて危険】CodeGuide.dev の安全性調査レポート'
 tags:
   - Security
-  - tech
-  - documentation
   - AI
-  - GeoPolitics
+  - 地政学
 private: false
 updated_at: '2025-08-13T19:21:22+09:00'
 id: d7a61140276fd8f77d8b
