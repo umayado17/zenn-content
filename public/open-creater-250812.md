@@ -2,9 +2,8 @@
 title: '【1: 極めて危険】OpenCreator.io の安全性調査レポート'
 tags:
   - Security
-  - tech
   - AI
-  - privacy
+  - プライバシー
   - 生成AI
 private: false
 updated_at: '2025-08-13T09:18:33+09:00'
