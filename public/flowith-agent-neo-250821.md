@@ -3,8 +3,8 @@ title: '【0: 使用不可】Flowith Agent Neo：国籍偽装で隠蔽された�
 tags:
   - Security
   - AI
-  - CHINA
-  - GeopoliticalRisk
+  - 中国
+  - 地政学
   - Flowith
 private: false
 updated_at: '2025-08-21T08:40:47+09:00'
