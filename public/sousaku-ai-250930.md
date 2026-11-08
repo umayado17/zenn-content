@@ -4,7 +4,7 @@ tags:
   - Security
   - AI
   - tiktok
-  - GeopoliticalRisk
+  - 地政学
   - ByteDance
 private: false
 updated_at: '2025-09-30T18:48:39+09:00'
