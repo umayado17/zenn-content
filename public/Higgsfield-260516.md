@@ -3,8 +3,8 @@ title: 【安全性レベル0】Higgsfield AIの安全性調査レポート ― 
 tags:
   - Security
   - AI
-  - CHINA
-  - Russia
+  - 中国
+  - ロシア
   - Higgsfield
 private: false
 updated_at: '2026-05-16T22:04:56+09:00'
