@@ -3,9 +3,9 @@ title: '【0: 使用不可】LALAL.AI 安全性調査レポート：バイオメ
 tags:
   - Security
   - AI
-  - Russia
-  - privacy
-  - GeopoliticalRisk
+  - ロシア
+  - プライバシー
+  - 地政学
 private: false
 updated_at: '2025-11-28T01:13:59+09:00'
 id: 807344c19cc6a0a0403f
