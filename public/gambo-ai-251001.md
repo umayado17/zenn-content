@@ -3,8 +3,8 @@ title: '【1: 極めて危険】Gambo（gambo.ai）の安全性調査レポー�
 tags:
   - Security
   - AI
-  - CHINA
-  - GeopoliticalRisk
+  - 中国
+  - 地政学
   - Gambo
 private: false
 updated_at: '2025-10-01T10:31:27+09:00'
