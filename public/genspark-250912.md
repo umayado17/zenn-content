@@ -4,8 +4,8 @@ tags:
   - Security
   - ブラウザ
   - AI
-  - CHINA
-  - GeopoliticalRisk
+  - 中国
+  - 地政学
 private: false
 updated_at: '2025-09-12T23:52:33+09:00'
 id: 311f480623eea887b66a
