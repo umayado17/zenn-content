@@ -5,7 +5,7 @@ tags:
   - AI
   - GoogleDeepMind
   - Windsurf
-  - CodeEditor
+  - IDE
 private: false
 updated_at: '2025-08-27T00:55:49+09:00'
 id: e240d40568d99cbabeb6
